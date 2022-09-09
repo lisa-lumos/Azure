@@ -73,4 +73,13 @@ Throughput is measured in Throughput Units (TU). 1TU =
 
 These TUs are prepurchased, and billed by the hour. 
 
+Pricing: based on tier, ingress and TU. 
 
+## Selecting messaging solution
+
+| Service | Used for | Gurantees order | Max msg size | And also...
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Storage Queue | Dead  simple queueing | Yes | 54kb | Extremely simple, no additional cost |
+| Event Grid | Event driven architectures | No | 1mb | Great integration with other services |
+| Service Bus | Advanced queueing solutions | Yes | 256kb | Advanced messaging features, durable |
+| Event Hubs | Big data streaming | Yes | 1mb | Low latency, designed for heavy load |

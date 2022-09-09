@@ -6,6 +6,8 @@
 ## 8. Messaging in Azure
 - keywords: `Storage Queue`, `Service Bus`, `Event Grid`, `Event Hubs`
 
+## 9. Azure AD
+- keywords: 
 
 
 
