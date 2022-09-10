@@ -59,7 +59,7 @@ When using event grid, create a topic (system/custom).
 
 `Event producers` are components that generate events. Can be any one with the client/HTTP client. Uses simple connection and API. 
 
-`Partition`: A partition contains a single event stream, like a single queue that gurantees the order. A single partition has limited availability, therefore it is better to spread messages across partitions to improve availability - but then the order is not guranteed (order is gruanteed in a single partition only, not across partitions). `Max 32 partitions` on a single  event hubs. 
+`Partition`: A partition contains a single event stream, like a single queue that guarantees the order. A single partition has limited availability, therefore it is better to spread messages across partitions to improve availability - but then the order is not guaranteed (order is guaranteed in a single partition only, not across partitions). `Max 32 partitions` on a single  event hubs. 
 
 `Consumer group`: Is a logic group of receivers, but belong to the same application. Event receiving is done via AMQP protocol. 
 
@@ -77,7 +77,7 @@ Pricing: based on tier, ingress and TU.
 
 ## Selecting messaging solution
 
-| Service | Used for | Gurantees order | Max msg size | And also...
+| Service | Used for | Guarantees order | Max msg size | And also...
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Storage Queue | Dead  simple queueing | Yes | 54kb | Extremely simple, no additional cost |
 | Event Grid | Event driven architectures | No | 1mb | Great integration with other services |
