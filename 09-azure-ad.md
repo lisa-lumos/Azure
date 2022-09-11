@@ -127,4 +127,51 @@ It has 3 sections, that are base64 encoded, and concatenated with .:
 
 `jwt.io` allows you to construct or decode JWT. 
 
+## Azure AD B2C (Business-to-Customer) service
+It is an identity-as-a-service for your application, which enables integrating identity services in your app. It works with various identify providers and provides various customizable user flows. It can use various identity providers, such as Azure AD as the source of the user details. It is quite complex to set up and have a lot of moving parts. 
+
+Identity services provided by Azure AD B2C:
+- Sign up
+- Sign in
+- Log out
+- Reset password
+- ...
+
+Authentication features:
+- MFA
+- Conditional access
+- Audit log
+- Custom policies
+- Custom pages
+- ...
+
+## Syncing Azure AD with On Prem
+This is useful when the organization has apps on prem and in cloud and wants to have a single user base, so that users won't need to log in twice, once in the cloud and once on prem. 
+
+## Azure AD Connect
+This is the solution. It is an agent connecting on prem directory with the Azure AD. 
+
+Authentication with AD Connect:
+- Password with Hash Sync. The passwords are copied to Azure AD, and the authentication happens in the cloud. If Azure AD is not available for some time, then the login is blocked. 
+- Pass-through. The passwords stay on prem, Azure AD passes data to the on-prem directory for validation. The data is more protected since the pwds are not stored on the cloud. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
