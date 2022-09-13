@@ -29,14 +29,30 @@ Alerts pricing:
 Almost every Azure resource generate logs, the logs might contain data about performance, events, errors etc. Log records need central repository to be stored and viewed, this is the `Log Analytics Workspace`:
 - A `central loc` for storing, organizing and analyzing logs
 - `Aggregates logs` from all connected, monitored resources
-- Uses specialized query language to query logs
+- Uses specialized query language to query logs Kusto query language (KQL). 
 - Located in a `designated region`, which better be the same region of the resources to save costs. 
 
 ## Insights
-Insights is a collection of metrics, statisticc and insights about the resource that is specific to resource type. It is generated automatically. Code-based services (App Services, apps on VMs) can integrate Application Insights into the code and gain a lot of data about app usage, performance, etc. 
+`Insights` is a collection of metrics, statistics and insights about the resource that is specific to resource type. It is generated automatically. Code-based services (App Services, apps on VMs) can integrate Application Insights into the code and gain a lot of data about app usage, performance, etc. 
+
+There's a lot more to Application Insights than availability tests. You can add the Application Insights SDK to your code (supported for .NET, Java, nodeJS & Python) and get a full, comprehensive monitoring solution for your app, which will help you detect:
+- Request rates, response times and failure rates
+- Dependency rates and failures
+- Exceptions
+- Page views and load performance
 
 ## Azure Monitor
 A central loc for all the monitoring aspects of Azure's resources. It provides access to metrics, logs, insights, etc, and has additional capabilities not found in the individual resources. 
+
+## Resource Tags
+Resources are organized into Resource Groups, but sometimes we need more information about resources, like to which environment does the resource belong to (test/production); to which app it belongs; which group is rensponsible for it, etc.
+
+`Tags` help organize resources usings name-value pairs. Tags can be set during creation of resource or after that. Tags allow us to show needed information in a simple query, it is also useful in cost analysis. 
+ 
+Examples:
+- Environment: Test
+- App: ReadIt
+- Group: the-team-A
 
 
 
