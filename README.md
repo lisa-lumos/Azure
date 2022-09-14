@@ -12,7 +12,10 @@
 ## 10. Monitoring in Azure
 - keywords: `Dashboard`, `Alerts`, `Logs & Analytics Workspace`, `Insights`, `Azure Monitor`, `Resource Tags`
 
-## 11. Security  in Azure
+## 11. Security in Azure
+- keywords: `VM Security Best Practices`, `Networking Security Best Practices`, `Database Security Best Practices`, `App Service Security Best Practices`, `KeyVault`, `Microsoft Defender for the Cloud`
+
+## 12. Diascter Recovery (DR) in Azure
 - keywords: 
 
 

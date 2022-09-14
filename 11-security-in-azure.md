@@ -30,8 +30,8 @@ Many apps have `secrets` that need to be kept safely - Connection strings, keys,
 
 `KeyVault` saftly stores secrets of various types, and provides very restricted access - needs Azure AD authentication. It supports Hardware Security Modules for enhanced security, and is easily manageable and cost effective. KeyVault can be accessed via `REST API`. 
 
-
-
+## Microsoft Defender for the Cloud
+It is a central loc for monitoring and alerting security-related issues. It displays a summarized list of problems found in the subscriptions resources. In some cases, allows a single-click fix. So it is a good practice to take a look at it every once in a while. 
 
 
 
