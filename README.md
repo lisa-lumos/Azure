@@ -16,7 +16,7 @@
 - keywords: `VM Security Best Practices`, `Networking Security Best Practices`, `Database Security Best Practices`, `App Service Security Best Practices`, `KeyVault`, `Microsoft Defender for the Cloud`
 
 ## 12. Diascter Recovery (DR) in Azure
-- keywords: 
+- keywords: `Disaster recovery`, `Hot DR`, `Cold DR`, `Recovery Point Objective (RPO)`, `Reovery Time Objective (RTO)`, `Routing in DR`, `Azure Traffic Manager`, `Azure Front Door`
 
 
 
