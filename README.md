@@ -18,7 +18,13 @@
 ## 12. Diascter Recovery (DR) in Azure
 - keywords: `Disaster recovery`, `Hot DR`, `Cold DR`, `Recovery Point Objective (RPO)`, `Reovery Time Objective (RTO)`, `Routing in DR`, `Azure Traffic Manager`, `Azure Front Door`
 
+## 13. Managing Cost in Azure
+- keywords: `Azure Cost Management`
 
+## 14. Azure Policy
+- keywords: `scopes`, `Azure policy concepts`
+
+## 
 
 
 
