@@ -12,13 +12,32 @@ Architecting for the cloud is different than classic Software Architecture. Ther
 | Graph | Data representing relationships | Family tree | Cosmos DB (with Gremlin API) |
 | Blob | Files, videos, docs | photos | Azure Blob Storage |
 
-## 
+## Choosing Messaging Platform
+| Service | Used For… | Guarantees Order | Max Msg Size | And also… |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Storage Queue  | Dead simple queueing | Yes| 64KB | Extremely simple, no additional cost|
+| Event Grid | Event driven architectures | No |  1MB | Great integration with other services |
+| Service Bus  | Advanced queueing solutions | Yes | 256KB | Advanced messaging features, durable |
+| Event Hubs | Big data streaming | Yes | 1MB |Low latency, designed for heavy load |
 
+## Implementing Security
+Security is extremely important in the cloud, so you should use the best practices discussed in the Security section, mainly: 
+- Restrict access to VMs and App Services
+- Use NSG
+- Use encryption in data stores
+- Use strong authentication
 
+## Implementing Logging and Monitoring
+- Azure offers various logging and monitoring tools
+- Utilize alerts to notify on any exceptional situation
+- Create dashboards to visualize the system state
+- Use Application Insight to gain insights into your app
 
-
-
-
+## Azure Architecture Center
+- Central hub for all-things Azure architecture
+- How-tos, documents, design guidelines, case studies
+- Fresh content, updated regularly
+- url: `https://learn.microsoft.com/en-us/azure/architecture/`
 
 
 

@@ -24,7 +24,8 @@
 ## 14. Azure Policy
 - keywords: `scopes`, `Azure policy concepts`
 
-## 
+## 15. Architecting Apps for Azure
+- keywords: `Choosing Compute Platform`, `Choosing a Data Platform`, `Choosing Messaging Platform`, `Implementing Security`, `Implementing Logging and Monitoring`, `Azure Architecture Center`
 
 
 
