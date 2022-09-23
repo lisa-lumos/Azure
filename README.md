@@ -1,5 +1,8 @@
 # Microsoft Azure project
 
+## 1. Introduction to the Cloud
+- keywords: (Placeholder)
+
 ## 7. Data in Azure
 - keywords: (Placeholder)
 
