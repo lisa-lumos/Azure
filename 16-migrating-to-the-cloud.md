@@ -61,9 +61,22 @@ services. DDon't try to go straight to refactoring before making sure that the l
 DB Migration. In general: Prefer the managed version of the DB (and not on a VM). Migration is better done using the DB’s own tools and not via Azure migration services. Every database has its own migration tools, whether using export, import,  backup, etc.
 
 ## App Enhancements
-## Testing
-## Go Live
+After migration, the next step is to enhance the system. This not necessarily requires code changes. Main areas for improvements are:
+- Logging and Monitoring using Azure Monitor
+- Network protection using Application Gateway
 
+## Testing
+- Testing in cloud is similar to on-prem
+- Put strong emphasis on logging and monitoring
+- Make sure you have access to system’s data
+- If system is auto-scaled or DRed – test these scenarios
+- Check performance – might vary from the on-prem figures
+
+## Go Live
+Keep an eye on the costs: 
+- Set up budget alerts
+- Define tags
+- Look at the data at least once a month
 
 
 

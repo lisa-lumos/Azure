@@ -27,9 +27,14 @@
 ## 15. Architecting Apps for Azure
 - keywords: `Choosing Compute Platform`, `Choosing a Data Platform`, `Choosing Messaging Platform`, `Implementing Security`, `Implementing Logging and Monitoring`, `Azure Architecture Center`
 
+## 16. Migrating to the cloud
+- keywords: `Six steps of the migration process`, `Lift & Shift`, `Refactoring`, `Rewrite`
 
+## 17. Advanced Services
+- keywords: `IOT Hub`, `Notification Hub`, `Cognitive Services`
 
-
+## 18. Conclusion
+- keywords: `Architecture Summary`
 
 
 
