@@ -1,6 +1,21 @@
 # Microsoft Azure project
 
 ## 1. Introduction to the Cloud
+- keywords: `Cloud Providers`, `Cloud Services`, `Characteristics of Cloud Computing`, `CapEx`, `OpEx`, `IaaS`, `PaaS`, `SaaS`, `Public Cloud`, `Private Cloud`, `Hybrid Cloud`
+
+## 2. 
+- keywords: (Placeholder)
+
+## 3. 
+- keywords: (Placeholder)
+
+## 4. 
+- keywords: (Placeholder)
+
+## 5. 
+- keywords: (Placeholder)
+
+## 6. 
 - keywords: (Placeholder)
 
 ## 7. Data in Azure

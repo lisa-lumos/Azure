@@ -1,4 +1,4 @@
-# Introduction to the Cloud
+# 1. Introduction to the Cloud
 ## Intro - Why Cloud? 
 - 90% of software companies use the cloud. 
 - Many companies believe that the future of their it is laying in the cloud and they are willing to spend a lot of money on it.
@@ -11,7 +11,7 @@
 - The most regions
 - The most popular in enterprises
 
-## Before the cloud…
+## Before the cloud
 If you needed a server, you had to: buy it, install it, maintain it, and replace it when it gets old. In general, you need to have an `IT team`. And the same thing happens with networking, databases, user management, and more…
 
 ## The Cloud
@@ -83,6 +83,28 @@ Below chart depicts the level of control we need to have on each type of resourc
 - DaaS – Desktop as a Service
 - IOTaaS – IOT as a Service
 - AIaaS – AI as a Service
+
+## Types of Clouds
+### 1. Public Cloud
+The cloud is set up in the `public network`, and is `managed by large companies`. It is `accessible through the internet`, and is vailable to all clients and users. Clients have `no access to underlying infrastructure`. 
+
+Examples: AWS, Azure, GCP, IBM Cloud
+
+### 2. Private Cloud
+A cloud set up in an organization’s `premises`, and is `managed by the organization’s IT team`. It is accessible `only in the organization’s network`, and is available to users from the organizations. It uses private cloud infrastructure and engines, and contains a `subset of the public cloud’s capabilities`. 
+
+Examples: vmware Cloud, Openshift container platform, Azure Stack
+
+### 3. Hybrid Cloud
+A cloud set up in an organization’s `premise`, but also `connected to the public cloud`. The workload can be `separated` between the two clouds. ie. Sensitive data in the organization’s premises, public data in the public cloud. Hybrid cloud is `usually managed by the public cloud`, but not always. 
+
+Example: Azure Arc, AWS Outposts. Both have public cloud manages private cloud. 
+
+## Cloud Providers
+`Cloud providers` are companies which `build datacenters` and `provide public cloud
+services`, such as IaaS, PaaS, SaaS, and other services. 
+
+
 
 
 
