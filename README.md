@@ -3,19 +3,19 @@
 ## 1. Introduction to the Cloud
 - keywords: `Cloud Providers`, `Cloud Services`, `Characteristics of Cloud Computing`, `CapEx`, `OpEx`, `IaaS`, `PaaS`, `SaaS`, `Public Cloud`, `Private Cloud`, `Hybrid Cloud`
 
-## 2. 
+## 2. Introduction to Azure
+- keywords: `Regions`, `Zones`, `Availability Zones`, `Paired Regions`, `Azure Services`
+
+## 3. First Look at Azure
+- keywords: `Subscription and Account`, `Creating Resource`, `Finding the Resource`, `The Resource Page`, `Removing a Resource`, `Azure CLI & PowerShell`
+
+## 4. Azure Basic Concepts
 - keywords: (Placeholder)
 
-## 3. 
+## 5. Azure Compute
 - keywords: (Placeholder)
 
-## 4. 
-- keywords: (Placeholder)
-
-## 5. 
-- keywords: (Placeholder)
-
-## 6. 
+## 6. Azure Networking
 - keywords: (Placeholder)
 
 ## 7. Data in Azure
