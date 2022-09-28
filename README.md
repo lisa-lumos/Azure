@@ -10,7 +10,7 @@
 - keywords: `Subscription and Account`, `Creating Resource`, `Finding the Resource`, `The Resource Page`, `Removing a Resource`, `Azure CLI & PowerShell`
 
 ## 4. Azure Basic Concepts
-- keywords: (Placeholder)
+- keywords: `Regions`, `Resource Groups`, `Storage Accounts`, `SLA (Service Level Agreement)`, `Cost`, `Setting Budget`, `Architects and the Cloud`
 
 ## 5. Azure Compute
 - keywords: (Placeholder)

@@ -37,13 +37,28 @@ When creating a new resource/service, ALWAYS check the SLA of the service used. 
 ### SLA Calculation
 To get the actual system SLA, `multiply` the SLAs of the participating services. Online tools to calculate SLA: `https://uptime.is/`
 
+## Cost
+Almost everything in the cloud costs money. Here are a few pricing models:
+- Per resource (ie. VM)
+- Per consumption (ie. Function Apps)
+- Reservations
 
+ALWAYS check resource’s cost before provisioning. Check for more cost-effective alternatives. Look for reservations when available and relevant. Azure pricing calculator: `https://azure.microsoft.com/en-us/pricing/calculator/`. 
 
+## Setting Budget
+In Azrue Portal search bar, type "cost management", and click on the "Cost Management + Billing" service. Click on "Cost Management" in the left pane. Then click on "Budgets". Here we can define a budget, and when we get close, we will get an notification. Click + sign to add a budget. Give it a name, set "Reset Period" to Annual, and set amount to "200". In the next page, Alert conditions, set as Acutal 90%. 
 
+## Architects and the Cloud
+Software Architects designing `regular system` need to know:
+- Non-Functional Requirements
+- Technology Stack
+- Component’s Architecture
+- Communication Patterns
 
-
-
-
+`Cloud-based systems` require, in addition:
+- Infrastructure knowledge
+- Security
+- Hands-on
 
 
 
