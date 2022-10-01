@@ -17,10 +17,60 @@ Note that when you create a VM in Azure, many resources will be created at the s
 Click "Go to resource", read through the Essentials section, and note that "Virtual network/subnet: first-vm-rg-vnet/default". Click the "Connect" button at the top bar. Usually, we connect to Windows VM using RDP, and Linux VM using RDH. Select RDP here, and in the new pane, click "Download RDP File". On a mac, could download free "Microsoft Remote Desktop" app from App Store, and open the RDP file with this app. The window will open and it looks like a actual Windows Server. Now close this window, and go to Overview page of the VM in the Portal and click "Stop" button at the top bar. Note that after stopping the VM, there are still payments that might inccur, mainly for storage and sometimes the IP address. In order to make sure that we will no longer pay for anything for the resources that we just created, we need to `delete the whole resource group`, that is why we create a new resource group when we create a new VM. So in the search bar, search Resource Groups, and see a list of all rgs in the accout. Click on the rg containing VM, and click "Delete resource group" in the top bar. 
 
 ### The Real Cost of VM
-- The VM itself
-- The disk of the VM
-- IP - The public IP that is exposed by the VM, the price of the IP depends on the exact type of the IP that is exposed. Not all IP/public IP addresses has a cost. 
-- Storage - Where the image of the VM is stored. It is stored in a storage account, and we have no access to it, but we need to pay for it. The price of the storage is extremely low. 
+- The `VM` itself
+- The `disk` of the VM
+- `IP` - The public IP that is exposed by the VM, the price of the IP depends on the exact type of the IP that is exposed. Not all IP/public IP addresses has a cost. 
+- `Storage` - Where the image of the VM is stored. It is stored in a storage account, and we have no access to it, but we need to pay for it. The price of the storage is extremely low. 
+
+### Reducing the Cost of VM
+- `Auto Shutdown` - Automatically shuts down the machine when not needed, mainly for test / dev machines. Note that storage and IP (if static) costs still incurred. Usually can save >50% of VM cost
+- `Reserved Instances` - Allow upfront payment with substantial discount. It is usually offered for 1 or 3 years, and is great for production machine which run continuously. Offers great discounts (up to 62%), and can be divided to monthly payments. Cannot be stopped / refunded
+- `Spot Instances` - Machines that run on unused capacity in Azure. Can be evicted any moment when needed by Azure. Offers up to 90% discount, price fluctuates according to demand. Great for non-critical, non-continuous tasks. ie. Batch processes, long running calculations
+- `Disk Optimization` - Make sure to select the right disk for the machine. Default is `Premium SSD` – the most expensive option. Non IO-intensive machines can do with `Standard SSD`. ie. App servers, in-memory cache. Note: Disk type affects the `SLA`
+
+More Cost Saving Techniques:
+
+- Select the right size for your machine
+- CPU shouldn’t rest, you pay for it...
+- Select Linux over Windows when possible to avoid license fee
+- Check price in nearby regions
+
+### SLA of VM
+`https://azure.microsoft.com/en-us/support/legal/sla/virtual-machines/v1_9/`
+
+Availability Concepts in Azure: Fault Domain, Update Domain, Availability Set, Availability Zone. 
+
+`Fault Domain`: `Logical group of physical hardware` that share a `common power
+source and network switch`. Similar to rack in a traditional data center. If there’s a problem with the power or networking in the domain (=rack) – all servers in it shut down. So you want to make sure your servers are spread
+across more than one fault domain (=rack). 
+
+`Update Domain`: `Logical group of physical hardware` that can `undergo maintenance and be rebooted at the same time`. Maintenance is done by Azure at its own discretion. If all your servers are in the same update domain, they’ll reboot at the same time during maintenance. You want to make sure your servers are spread across more than one update domain. 
+
+`Availability Set`: `A collection of Fault Domains and Update Domains` your VMs will be spread across. It is always `in a same zone`. Can contain up to `3 Fault Domains` and up to `20 Update Domains`. `All domains (Fault & Update) are in the same Zone (=datacenter)`.
+
+For example, if an availability set has 2 fault domains and 3 update domains, Azure will automatically spread your VMs in this availability set into separate fault and update domains. Without availability set, Azure might put these two VMs into the same fault domain, because it has no idea that these two VMs belong to the same application. 
+
+Taking Advantage of Availability Set:
+
+- Deploy identical VMs into t`he same Availability Set`, which ensures they won’t be shut down simultaneously when a single fault domain shuts down or an update domain reboots
+- If needed – deploy `load balancer` to route between the VMs
+- Availability Set is `free`, you pay only for the additional VMs
+
+### Availability Zone
+A `physically separate zone` within an `Azure region`. Technically – a building containing an autonomous data center. Provides protection against a `complete zone shutdown`. Hence the `better SLA`.
+
+Taking Advantage of Availability Zone:
+
+- Deploy identical VMs into `separate Availability Zones` in the same Region, which ensures they won’t be shut down simultaneously when the zone shuts down
+- If needed – deploy `load balancer` to route between the VMs
+- Availability Zone is `free`, you pay only for the additional VMs
+
+
+
+
+
+
+
 
 
 
