@@ -84,12 +84,17 @@ dir
 az deployment group create --resource-group [name-of-your-rg] --template-file template.json --parameters parameters.json
 ```
 
+### Delete the VM
+To delete the VM that was just created, go to the VM, and click the "Delete" button on the top bar. Note that in addition to this VM itself, other resources that were created at the same time, such as the OS disk, Network interfaces, Public IP addresses will also show up for selection when you click the "Delete" button. Azure asks us to select from them, because sometimes we want to use these resources with other virtual machines, or other resources. For example, we can move this disk from this virtual machine to the other. Azure do not put "Vnet" into list, because it often contain other resources, so user will not accidentally delete it. If we select all items in the list and delete, and navigate to the rg that used to contain the VM, there is only a VNet and a NSG left. Next, we can delete this rg. 
 
+### VM Scale Set
+A `VM Scale set` is `a group of separate VMs sharing the same image`, managed as a group. It can be scaled out or in `manually` or `automatically` according to predefined conditions. It is great for handling unpredictable load. 
 
+Note that once it is set up, the machines should NOT be modified - you cannot change files, install apps etc. Because new machines created by the scale set will be based on the original image only. 
 
+For web apps, a load balancer should be put in front of the scale set, so it exposes a single domain name, and load balancer will handle the routing to existing VMs in the scale set. 
 
-
-
+Scale Set is free - you pay for the VMs deployed in it. 
 
 
 
