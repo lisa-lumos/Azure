@@ -96,6 +96,40 @@ For web apps, a load balancer should be put in front of the scale set, so it exp
 
 Scale Set is free - you pay for the VMs deployed in it. 
 
+To use VM scale set, go to the search bar in the portal, and search "scale set". In the new page, click "Add". Select the subscription, and create a new rg "vmss-rg". Name the set "my-vmss", pick a Region, and decide the Availability Zone. Pick a image and size, and create username and pwd. Then click "Review + create", then "Create". Note that in real practice, you will not create a scale set using a vanilla image of os with no app it. The default num is 2 VMs in a VMSS. When we go to the Instances page, it will show all the VMs in this VMSS. The "Scaling" page is where we decide how to scale the VMs - you can choose `"Manual scale"` or `"Custom autoscale"`. With autoscale, a policy can decide when the SS will add more instances to the current pool of VMs. Inside the policy, we can decide the min, max and default num of VMs, and a set of scaling rules. 
+
+For example, a `scale rule` can be: when the average use of CPU is more than 80%, and it has been like this for more than 10 min, then increase the VM cnt by 1; the rule could have a cool down time of 5 min, which means after this autoscale happens, the SS will wait for 5 min before checking whether another scaling operation is needed, so the num of instances will not change too frequently. The above scale rule allows the SS to `scale out`, we can also define a scale rule that allows the SS to `sacle in`. Click "Save" after modification. If an error "Failed to update resource (missing Subscription Registration)", then this is one of the many capabilities of Azure that can only be used after got registered in your subscription. To not lose current edits, duplicate the current browser tab, in the search bar, type "subscriptions", in the new page, select our subscription, scroll down in the left pane to find "Resource Providers", it shows all services in Azure, some registered, some not. In the filer, type "insight", and find the "microsoft.insights", and click "Register" at the top bar. If webpage takes long time to update, can check status in the cloud shell: `az provider show --namespace microsoft.insights -o table`. If it shows registered, then go to the previous tab, and click "save" again, it will work. Now, the SS Instances page will show that it is deleting one instance, because the rule is working. 
+
+Also, in the Scaling page, there is a "Scale-In Policy" tab that allows us to decide which VMs to remove when scale in happens: Default (balance availability zones and fault domain), NewestVM or OldestVM. 
+
+### Azure Instance Metadata Services
+This is a not commonly known feature. It is a `Rest API` that is accessible from the VM, and provides a lot of `info about the machine`, such as SKU, storage, networking, scheduled events, etc. This API is accessible ONLY from the VM. With scale set, `the VM gets notification from the scale set about its upcoming eviction`. And if we listen to the meta data service, we can now that an eviction is in place, and that in a few sec, the VM will be deleted. So if there are some final actions you need to run as part of this eviction, you can perform these actions. This info can be polled `every 1 min` to get enough time to close things up. 
+
+To use this API, create a new VM with WS data center, connect to it using rdp, and wait for the Server Manager to load up, so we can configure the machine for easy web browsing. Go to Local Sever on the left pane, on the right, near "IE Enhanced Security Configuration", click the "On" hyperlink, in the pop up window, select "Off" for both Admins and Users, and save. Next open IE, and download and install Postman app. In Postman, create a new tab, use the "GET" request type, and go to Headers, set the value of "KEY" as "Metadata", and "VALUE" as "true", and the link as `http://169.254.169.254/metadata/instance?api-version=2020-06-01`. Next, click "Send" and receive various info about this VM. If we replace the url with `http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01`, we can get a list of scheduled events. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
