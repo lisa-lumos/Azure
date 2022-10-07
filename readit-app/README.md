@@ -48,13 +48,16 @@ Virtual Machines Tips and Tricks:
 - Want to backup your VM so that it can be restored in a case of failure? Check the Backup page, where you can define the frequency of the backup and the retention period.
 - You can define DNS name for the VM, so that it will be accessible not just using its IP. This can be done by clicking the DNS Name: Configure link in the Overview page.
 
-When not in use, we an stop the VMs so we no longer pay for it. But we still need to pay for the static public IP address. 
+When not in use, we can stop the VMs so we no longer pay for it. But we still need to pay for the static public IP address. 
 
+## Azure Architecture Diagram
+When designing architecture for Azure apps it’s a good idea to use Azure symbols in the diagram, and there are hundreds of them: `https://docs.microsoft.com/en-us/azure/architecture/icons/`. 
 
+Here is what current architecture look like:
 
+<img src="images/architecture1.png" style="width: 30%">
 
-
-
+Note that is is a back practice to allow a VM to be directly accessible from the internet so it ican be rdped from anywhere. You should never leave a VM open to the internet this way. 
 
 
 
