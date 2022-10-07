@@ -116,7 +116,11 @@ App Services are extremely easy to deploy:
 
 Develop you app -> create web app (can be done from IDE) -> publish your code  -> done!
 
+### App Service Tiers
+`Free` (try for free), `basic` (dedicated env for dev/test), `standard` (run production workloads), `premium` (enhanced performance and scale), `isolated` (high performance, security and isolation). For details see `https://azure.microsoft.com/en-us/pricing/details/app-service/windows/`. The `price is highly affected by the OS` you select. In general, `Linux app services are much cheaper than Windows` app services, similar to VM. The listed price is the lowest price, the price goes up with CPU & RAM selection. 
 
+### App Serivce Auto Scaling
+App Service can be `autoscaled` to support spikes in load. E.g., you can start with one instance, and if the load increases, the app service can automatically add instances, and remove them when load goes back to normal. Auto scale is based on various metric, and it is extremely flexible. The scale policy page is just like these for VM scale set. 
 
 
 
