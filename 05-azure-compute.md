@@ -122,8 +122,13 @@ Develop you app -> create web app (can be done from IDE) -> publish your code  -
 ### App Serivce Auto Scaling
 App Service can be `autoscaled` to support spikes in load. E.g., you can start with one instance, and if the load increases, the app service can automatically add instances, and remove them when load goes back to normal. Auto scale is based on various metric, and it is extremely flexible. The scale policy page is just like these for VM scale set. 
 
+### App Services Tips and Tricks
+- By default, App Services can be accessed using http and https. You can make it `https` only in the `TLS/SSL settings` in the App Service menu.
+- App service can run also batch processes, or continuous jobs, and not only web apps with the request/response  paradigm. This can be done using the `WebJobs` menu item, where you can upload `exe file` that will run always, or on scheduled times.
+- Want to know the `IP address of the App Service`? Take a look at the `Properties` of the page. You can find there the Virtual IP address of the App Service, and also - the Outbound IP addresses - App Service can have more than one outbound IP address.
+- Want to know `how much storage did you use`, and what are the current usage statistics? Go to `Quotas` for this data.
 
-
+With VMs, I recommended you to shut down the VM when not in use. With App Service, this is not the case. While you can stop an App Service (using the Stop button at the top of the Overview page), all it will do is to stop the functionality of the App Service, but you'll still pay for it. That's an important difference between App Service and a VM. With VM - you pay only when the VM is On. `With App Service - The only way to stop paying for it is to completely delete it`. This is another difference between VM and App Service you should keep in mind.
 
 
 

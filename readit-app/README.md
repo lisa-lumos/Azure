@@ -59,6 +59,47 @@ Here is what current architecture look like:
 
 Note that is is a back practice to allow a VM to be directly accessible from the internet so it ican be rdped from anywhere. You should never leave a VM open to the internet this way. 
 
+## Inventory App - App Service
+Open the "inventory" folder in VScode, and hit F5 to start debugging, then will see the inventory app open in browser. 
+
+To deploy this inventory app to app service, go to the portal, and search "app services", and "Create". In the new page, use "readit-app-rg" as the resource group. Unlike VM where we can pick any name we want, name of an app service is part of the app service domain itself (`.azurewebsites.net`), and has to be unique across all Azure. I name it "readit-inventory-lisa". Select Publich as Code, Runtime stack as .Net 6 (LTS), OS as Windows, and use the free F1 as size. And create. 
+
+Go to the resource, and click the URL "https://readit-inventory-lisa.azurewebsites.net" in the overview page, can see the place holder page for the app service. Now go back to vscode, and stop running the code, and go to its built in terminal and `dotnet publish -o publish`. In the left pane in explorer view, right click the "publish" folder, and click "Deploy to Web App...". This option comes from the azure web service extention we installed earlier. Signin to Azure in the browser window that opens, and select the subscription, and click the app service "readit-inventory-lisa", and click Deploy. (For mac, need to go to vscode settings, and search Azure, and under Workspace pane, set the Deploy Subpath \ to /). Click Open the website, and will see the deployed inventory app:
+
+<img src="images/inventory1.png">
+
+To get a close look at this app service in Azure, go to the "Development Tools" section in the left pane, and click "App Service Editor (Preview)", and click "Go". This allows to edit and view the code iteself. Click "Console" under the "Development Tools", which gives us a CLI into the machine that holds this app service. `dir` shows a list of the files that are deployed in the service. Under "App Service Plan" section, under the same name, shows the tier for the app service. The free tier is limited to `60 min of use per day`. The plan can be `scaled up`(manually) or `scaled out`(auto scaling, not supported for free tier) in the Settings section, and can select different plans under different tiers (dev/test, production, isolated). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
