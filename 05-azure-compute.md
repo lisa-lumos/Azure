@@ -130,7 +130,8 @@ App Service can be `autoscaled` to support spikes in load. E.g., you can start w
 
 With VMs, I recommended you to shut down the VM when not in use. With App Service, this is not the case. While you can stop an App Service (using the Stop button at the top of the Overview page), all it will do is to stop the functionality of the App Service, but you'll still pay for it. That's an important difference between App Service and a VM. With VM - you pay only when the VM is On. `With App Service - The only way to stop paying for it is to completely delete it`. This is another difference between VM and App Service you should keep in mind.
 
-
+## Azure Kubernetes Services (AKS)
+Managed Kubernetes on Azure, which allows `deploying containers and managing them using Kubernetes`. You pay only for the instances (=`VMs`) used to run Kubernetes. 
 
 
 
