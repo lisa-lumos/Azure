@@ -133,8 +133,23 @@ With VMs, I recommended you to shut down the VM when not in use. With App Servic
 ## Azure Kubernetes Services (AKS)
 Managed Kubernetes on Azure, which allows `deploying containers and managing them using Kubernetes`. You pay only for the instances (=`VMs`) used to run Kubernetes. 
 
+## Containers
+In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren’t found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be excuted using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
 
+Diff between containers and VMs: One host/hypervisor can run VMs of different OS, and for containers, the host (container runtime) runs multiple containers. The containers are extremely lightweight compared with the VMs, this is because the containers have the same OS with their host, while it is not the case with VMs.
+ 
+<img src="images/containers-vs-vm.png">
 
+Why containers:
+- Predictability - The same package is deployed from the dev machine to the test to production. This is the primary reason. 
+- Performance - Container goes up in seconds vs minutes in VM
+- Density - One server can run thousands of containers vs dozens of VMs
+
+Why not containers:
+- Isolation - Containers share the same OS, so isolation is lighter than VM. It is much easier to cross the boundaries between the containers than between the VMs. So if your app contains sensitive code or data, it should be probably be deployed on an isolated VM - it can still use containers for the deployment itself, but it shouldn't share the host machine with containers of other apps. 
+
+### Docker
+Docker is the most popular container environment, and the de-facto standard for containers. It is supported by all major operating systems (Windows, Linux, OSX) and major cloud providers (Amazon ECR, Azure ACR, etc.)
 
 
 
