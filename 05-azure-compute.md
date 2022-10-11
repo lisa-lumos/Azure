@@ -137,7 +137,7 @@ Managed Kubernetes on Azure, which allows `deploying containers and managing the
 In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren’t found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be excuted using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
 
 Diff between containers and VMs: One host/hypervisor can run VMs of different OS, and for containers, the host (container runtime) runs multiple containers. The containers are extremely lightweight compared with the VMs, this is because the containers have the same OS with their host, while it is not the case with VMs.
- 
+
 <img src="images/containers-vs-vm.png">
 
 Why containers:
@@ -151,7 +151,8 @@ Why not containers:
 ### Docker
 Docker is the most popular container environment, and the de-facto standard for containers. It is supported by all major operating systems (Windows, Linux, OSX) and major cloud providers (Amazon ECR, Azure ACR, etc.)
 
-
+### Kubernetes - containers management
+Kubernetes is the most popular container management platform. It is currently the de-facto standard for container management. It provides all aspects of management:  Routing, Scaling, High-Availability, Automated Deployment, Configuration Management, etc. A `pod` can be think of as a container of containers. Usually there's one docker container inside one pod. The pod exposes one IP address, which is how the kubernetes communicate with the container. The containers are accessible to the public network using `service`. 
 
 
 
