@@ -73,10 +73,17 @@ To get a close look at this app service in Azure, go to the "Development Tools" 
 ## Current Architecture
 <img src="images/architecture2.png" style="width: 40%">
 
+## Cart App
+### Container part
+Next step is to deploy the cart app into a container on Azure. Install Docker Desktop and Azure CLI using `brew update && brew install azure-cli` on the local machine. First run the app locally. Next install the Docker extension in VS code. Right click on the Dockerfile in the cart folder, and select "Build Image...". After build is complete, to run a new container based on this image, click the docker pane on the left bar, and under Images section, open the drop down menu near cart, and right click the "latest", and click Run. In the containers section, the container is called "cart:latest". Right click on it, and "Open in Browser" - we can see the app opens same as before. 
 
+Next, we will create an Azure container registry, and upload the docker image to this registery. Under the Registries section, click on "Connect Registry", and select Azure. Right click on the "Azure subscription 1" in the Azure registry, and "Create Registry...", name it "readitacrlisa", and select the "Basic" tier, which will cost around 5$/month. Select resource group as "readit-app-rg", and location as "West Europe". If a message pops up as "The subscription is not registered to use namespace 'Microsoft.ContainerRegistry'", then we need to the Portal, and go to Subscriptions, then Resource providers, and search for "registry", and click "Register". Again sometimes it doesn't refresh the webpage even if it is registered, so could use `az provider show --namespace Microsoft.ContainerRegistry -o table` to check it using the cloud shell. To see the registry in the portal, search "container registries" in the search bar. 
 
+To push the container app to Azure container registry, in  VS code, under the Images right click the "latest", and click "Push...", and select the newly created registry, and hit enter. After the push is complete, go to the portal and go to the Repositories page in the Services section, we can see the cart image. 
 
+The next step is to create an AKS cluster and attach it to our newly created container registry, so it can pull the image from this registry. 
 
+### AKS part
 
 
 
