@@ -175,6 +175,24 @@ Cold start: Because Azure Functions are completely managed by Azure, so after so
 
 To avoid cold start, need to select the right hosting plan. 
 
+### Azure Functions Hosting Plans
+- Consumption: most popular, pay as you go, 1.5GB ram limit, has code start problem. Has free grants per month. Charged by per GB*s of memory and execution time, and num of total executions. 
+- Premium: pay for pre-warmed instances (hosts), so has no code starts, and predictable price. Charged by vCPU counts, and num of gb of memeory reservation (so has no memory limit, up to host RAM). Can pay for scale out instances. Can have better perforance. Get a security feature: VNet integration. It is more expensive than the consumption plan. 
+- Dedicated: The functions run on an existing App Service. It is great if the server is under-utilized; and there are not additional costs for this plan. For this plan, make sure that the "Aways On" is clicked in the app service configuration to avoid disabling functions. There's no auto-scale for the dedicated plan. 
+
+### Durable Functions
+They are Stateful Functions that interact with external resources and keep
+track of flow. They offer very simple syntax, hide complexities of managing state, retries, etc. For example, you can chain them - Function Chaining – call various Functions sequentially, and apply the output of each function to the next one. Each of these functions has its own state, its own process, and runs in its own time. 
+
+
+
+
+
+
+
+
+
+
 
 
 
