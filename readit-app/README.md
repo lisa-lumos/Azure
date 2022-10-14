@@ -75,7 +75,7 @@ To get a close look at this app service in Azure, go to the "Development Tools" 
 
 ## Cart App
 ### Container part
-Next step is to deploy the cart app into a container on Azure. Install Docker Desktop and Azure CLI using `brew update && brew install azure-cli` on the local machine. First run the app locally. Next install the Docker extension in VS code. Right click on the Dockerfile in the cart folder, and select "Build Image...". After build is complete, to run a new container based on this image, click the docker pane on the left bar, and under Images section, open the drop down menu near cart, and right click the "latest", and click Run. In the containers section, the container is called "cart:latest". Right click on it, and "Open in Browser" - we can see the app opens same as before. 
+Next step is to deploy the cart app into a container on Azure. Install Docker Desktop and Azure CLI using `brew update && brew install azure-cli` on the local machine. First run the app locally. Next install the Docker extension in VS code. Right click on the Dockerfile in the cart folder, and select "Build Image in Azure..."  (tag image as cart:latest and use linux platform). After build is complete, to run a new container based on this image, click the docker pane on the left bar, and under Images section, open the drop down menu near cart, and right click the "latest", and click Run. In the containers section, the container is called "cart:latest". Right click on it, and "Open in Browser" - we can see the app opens same as before. 
 
 Next, we will create an Azure container registry, and upload the docker image to this registery. Under the Registries section, click on "Connect Registry", and select Azure. Right click on the "Azure subscription 1" in the Azure registry, and "Create Registry...", name it "readitacrlisa", and select the "Basic" tier, which will cost around 5$/month. Select resource group as "readit-app-rg", and location as "West Europe". If a message pops up as "The subscription is not registered to use namespace 'Microsoft.ContainerRegistry'", then we need to the Portal, and go to Subscriptions, then Resource providers, and search for "registry", and click "Register". Again sometimes it doesn't refresh the webpage even if it is registered, so could use `az provider show --namespace Microsoft.ContainerRegistry -o table` to check it using the cloud shell. To see the registry in the portal, search "container registries" in the search bar. 
 
@@ -84,19 +84,39 @@ To push the container app to Azure container registry, in  VS code, under the Im
 The next step is to create an AKS cluster and attach it to our newly created container registry, so it can pull the image from this registry. 
 
 ### AKS part
+In the search bar in the Portal, search for "AKS", and click on "Kubernetes Services". Create -> Create a Kubernetes cluster. Choose the "readit-app-rg" as resource group, and the "Dev/Test($)" to save cost. For the cluster name, use "cart-aks", West Europe as Region, none availability zone, and choose "99.5%" for availability. 
 
+When select the Node/VM size, we can see that many options shows Insufficient quota. This is because every subscription has a quota for maximum num of resources (all sorts of resources, such as num of VNs, num of vCPUs, etc) you can use. To see how many resources in the quota we have used, go to the subscription, and click on Usage + quotas in the Settings section in the left pane. Note that the number of vCPUs is in the quota is a regional number - since it is per region, we can use other regions if we reached quota for one region. We can see quotas in different regions using the filter bar on top. So select a different region for AKS, and use the D2ads_v5. Use the Manual Scale method, and use 1 as Node count. 
 
+In the Integrations tab, and under Container registry, select the previouly created registry. Reveiw+Create -> Create. 
 
+After the deployment is complete, go to the resource, and check the specs. 
 
+Next step is to deploy the container into this AKS using VS code. Install the cli of AKS to we can run Kubernetes commands. In the terminal, type `sudo az aks install-cli`. Add below paths to ~/.bash_profile
+```
+export PATH=$PATH:/usr/local/bin/kubectl
+export PATH=$PATH:/usr/local/bin
+```
+And `source ~/.bash_profile` in mac terminal. Test that `kubelogin` and `kubectl` commands can be found. 
 
+Next, need to login to Azure from vscode terminal: `az login` and login from browser, then connect to the AKS cluster and get the credentials: `az aks get-credentials --resource-group readit-app-rg --name cart-aks`, and should see this returned: Merged "cart-aks" as current context in /Users/lisa/.kube/config. To see what is in the cluster: `kubectl get nodes`, then we should see:
+```
+NAME                                STATUS   ROLES   AGE   VERSION
+aks-agentpool-17225725-vmss000000   Ready    agent   17m   v1.23.12
+```
 
+Next, open the deployment.yaml file in the cart folder. This file specifies how the cubectl to deploy containers to the Kubernetes. Change line #16 to the actual ACR for the app: `image: readitacrlisa.azurecr.io/cart:latest`. Now we are ready to deply the container to kubernetes. In the vs code terminal, type `kubectl apply -f deployment.yaml`. The return should be:
+```
+deployment.apps/readit-cart created
+service/readit-cart created
+```
 
+Portal -> cart-aks -> Services and ingresses under Kubernetes resources section in the left bar -> note the readit-cart service in the list. click on it -> Click on Pods in the bottom pane, it should show Ready 1/1. Now go to the external IP of the readit-cart:
 
+<img src="images/cart.png">
 
-
-
-
-
+## Current Architecture
+<img src="images/architecture3.png" style="width: 60%">
 
 
 

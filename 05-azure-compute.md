@@ -154,14 +154,26 @@ Docker is the most popular container environment, and the de-facto standard for 
 ### Kubernetes - containers management
 Kubernetes is the most popular container management platform. It is currently the de-facto standard for container management. It provides all aspects of management:  Routing, Scaling, High-Availability, Automated Deployment, Configuration Management, etc. A `pod` can be think of as a container of containers. Usually there's one docker container inside one pod. The pod exposes one IP address, which is how the kubernetes communicate with the container. The containers are accessible to the public network using `service`. 
 
+## Azure Functions
+Azure functions are small, focused functions running as a result of an event. They are great for Event Driven systems, and are automatically managed by Azure (Start, stop, autoscale). It has flexible pricing plans, and is serverless.
 
+Serverless means a cloud resource that is completely managed by the cloud. So users do not need to think about VMs, CPU, Memory, etc.
 
+### Triggers and Bindings
+Trigger is the event that makes the function run. There are quite a few types of triggers, and they are deeply integrated into other Azure services. Technically not mandatory, but need a good reason for it...
 
+Bindings are declarative connection to other resource(s). With binding, you can set up a connection between the function and another resource in the cloud, so that you can read/write to value to these resources. These bindings are provided as parameter to the function and makes connecting to other resources extremely easy. Bindings are not mandatory. 
 
+Examples:
+- Run every 5 minutes (Timer Trigger) and calculate the sum of a column in a DB. If it’s above 115, send an event in EventGrid (Binding).
+- When a message arrives in the Orders Queue (Queue Trigger), save it in Cosmos DB (Binding) for future handling
+-  Receive HTTP Request (HTTP Trigger) with 4 numbers, and return the smallest one of them (no binding)
 
+Supported languages for Azure functions: C#, JavaScript (nodeJS), Java, Python, PowerShell, F#. 
 
+Cold start: Because Azure Functions are completely managed by Azure, so after some time of inactivity Azure might take down the Function’s host, therefore the next activation of the Function will take 2-3 seconds before the code runs. This delay is not a issue for async triggers such as Queues, timers etc, but it is a problem for HTTP-Triggered functions, because http calls are synchronous, and the callling party expects a quick response. 
 
-
+To avoid cold start, need to select the right hosting plan. 
 
 
 
