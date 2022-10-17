@@ -1,5 +1,5 @@
 # 5. Azure Compute
-`Compute` is a set of cloud services for `hosting and running applications` - it allows uploading and running your code. It offeres various levels of control and flexibility. `Iaas` and `Paas` belong to the Compute topic. 
+`Compute` is a set of cloud services for `hosting and running applications` - it allows uploading and running your code. It offers various levels of control and flexibility. `Iaas` and `Paas` belong to the Compute topic. 
 
 ## 🏷 Virtual Machines
 Virtual machine is a `virtual server` running on a `physical server`, this allows creating new servers extremely quick, because it is based on existing resources of the physical server. From the user's point of view, VM is a regular server. VM is an `unmanaged service`, because Azure doesn't manage what happens inside the VM - it is user's responsibility. VM is a classic `IaaS` service. 
@@ -14,7 +14,7 @@ Select the location, the image (OS + Pre-Installed software), and the size. Alwa
 
 Note that when you create a VM in Azure, many resources will be created at the same time, such as a `network security group`, a `public IP address`, `virtual network`, `network interface` and `the actual VM`. We can see these in the Deployment details section, but it doesn't show one more resource that is also created at the same time, which is the `disk`. This is important to know, because we pay some of these resources. 
 
-Click "Go to resource", read through the Essentials section, and note that "Virtual network/subnet: first-vm-rg-vnet/default". Click the "Connect" button at the top bar. Usually, we connect to Windows VM using RDP, and Linux VM using RDH. Select RDP here, and in the new pane, click "Download RDP File". On a mac, could download free "Microsoft Remote Desktop" app from App Store, and open the RDP file with this app. The window will open and it looks like a actual Windows Server. Now close this window, and go to Overview page of the VM in the Portal and click "Stop" button at the top bar. Note that after stopping the VM, there are still payments that might inccur, mainly for storage and sometimes the IP address. In order to make sure that we will no longer pay for anything for the resources that we just created, we need to `delete the whole resource group`, that is why we create a new resource group when we create a new VM. So in the search bar, search Resource Groups, and see a list of all rgs in the accout. Click on the rg containing VM, and click "Delete resource group" in the top bar. 
+Click "Go to resource", read through the Essentials section, and note that "Virtual network/subnet: first-vm-rg-vnet/default". Click the "Connect" button at the top bar. Usually, we connect to Windows VM using RDP, and Linux VM using RDH. Select RDP here, and in the new pane, click "Download RDP File". On a mac, could download free "Microsoft Remote Desktop" app from App Store, and open the RDP file with this app. The window will open and it looks like a actual Windows Server. Now close this window, and go to Overview page of the VM in the Portal and click "Stop" button at the top bar. Note that after stopping the VM, there are still payments that might incur, mainly for storage and sometimes the IP address. In order to make sure that we will no longer pay for anything for the resources that we just created, we need to `delete the whole resource group`, that is why we create a new resource group when we create a new VM. So in the search bar, search Resource Groups, and see a list of all rgs in the account. Click on the rg containing VM, and click "Delete resource group" in the top bar. 
 
 ### The Real Cost of VM
 - The `VM` itself
@@ -108,7 +108,7 @@ This is a not commonly known feature. It is a `Rest API` that is accessible from
 To use this API, create a new VM with WS data center, connect to it using rdp, and wait for the Server Manager to load up, so we can configure the machine for easy web browsing. Go to Local Sever on the left pane, on the right, near "IE Enhanced Security Configuration", click the "On" hyperlink, in the pop up window, select "Off" for both Admins and Users, and save. Next open IE, and download and install Postman app. In Postman, create a new tab, use the "GET" request type, and go to Headers, set the value of "KEY" as "Metadata", and "VALUE" as "true", and the link as `http://169.254.169.254/metadata/instance?api-version=2020-06-01`. Next, click "Send" and receive various info about this VM. If we replace the url with `http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01`, we can get a list of scheduled events. 
 
 ## 🏷 App Services
-`App Services` is a `fully managed web hosting for websites`, you just need to publish your code – and it just runs. You have no access to the underlying servers, it is secured and compliant by Azure. It integrates with many source controls and DevOps engines such as GitHub, BitBucket, Azure DevOps, DockerHub and more - the app is updated automatically when you upload a new verison of code on Github. 
+`App Services` is a `fully managed web hosting for websites`, you just need to publish your code – and it just runs. You have no access to the underlying servers, it is secured and compliant by Azure. It integrates with many source controls and DevOps engines such as GitHub, BitBucket, Azure DevOps, DockerHub and more - the app is updated automatically when you upload a new version of code on Github. 
 
 App Services support these `platforms`: `.NET`, `.NET Core`, `Node.JS`, `Java`, `Python`, `PHP`. It also supports `containers` - if you package your app in Docker then upload it to the service, it will just run, you don't need any configurations. The app types supported are: `Web Apps`, `Web API`, `Web Jobs (batch processes)`.  
 
@@ -134,7 +134,7 @@ With VMs, I recommended you to shut down the VM when not in use. With App Servic
 Managed Kubernetes on Azure, which allows `deploying containers and managing them using Kubernetes`. You pay only for the instances (=`VMs`) used to run Kubernetes. 
 
 ## Containers
-In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren’t found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be excuted using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
+In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren’t found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be executed using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
 
 Diff between containers and VMs: One host/hypervisor can run VMs of different OS, and for containers, the host (container runtime) runs multiple containers. The containers are extremely lightweight compared with the VMs, this is because the containers have the same OS with their host, while it is not the case with VMs.
 
@@ -171,18 +171,19 @@ Examples:
 
 Supported languages for Azure functions: C#, JavaScript (nodeJS), Java, Python, PowerShell, F#. 
 
-Cold start: Because Azure Functions are completely managed by Azure, so after some time of inactivity Azure might take down the Function’s host, therefore the next activation of the Function will take 2-3 seconds before the code runs. This delay is not a issue for async triggers such as Queues, timers etc, but it is a problem for HTTP-Triggered functions, because http calls are synchronous, and the callling party expects a quick response. 
+Cold start: Because Azure Functions are completely managed by Azure, so after some time of inactivity Azure might take down the Function’s host, therefore the next activation of the Function will take 2-3 seconds before the code runs. This delay is not a issue for async triggers such as Queues, timers etc, but it is a problem for HTTP-Triggered functions, because http calls are synchronous, and the calling party expects a quick response. 
 
 To avoid cold start, need to select the right hosting plan. 
 
 ### Azure Functions Hosting Plans
 - Consumption: most popular, pay as you go, 1.5GB ram limit, has code start problem. Has free grants per month. Charged by per GB*s of memory and execution time, and num of total executions. 
-- Premium: pay for pre-warmed instances (hosts), so has no code starts, and predictable price. Charged by vCPU counts, and num of gb of memeory reservation (so has no memory limit, up to host RAM). Can pay for scale out instances. Can have better perforance. Get a security feature: VNet integration. It is more expensive than the consumption plan. 
-- Dedicated: The functions run on an existing App Service. It is great if the server is under-utilized; and there are not additional costs for this plan. For this plan, make sure that the "Aways On" is clicked in the app service configuration to avoid disabling functions. There's no auto-scale for the dedicated plan. 
+- Premium: pay for pre-warmed instances (hosts), so has no code starts, and predictable price. Charged by vCPU counts, and num of gb of memory reservation (so has no memory limit, up to host RAM). Can pay for scale out instances. Can have better performance. Get a security feature: VNet integration. It is more expensive than the consumption plan. 
+- Dedicated: The functions run on an existing App Service. It is great if the server is under-utilized; and there are not additional costs for this plan. For this plan, make sure that the "Always On" is clicked in the app service configuration to avoid disabling functions. There's no auto-scale for the dedicated plan. 
 
 ### Durable Functions
 They are Stateful Functions that interact with external resources and keep
 track of flow. They offer very simple syntax, hide complexities of managing state, retries, etc. For example, you can chain them - Function Chaining – call various Functions sequentially, and apply the output of each function to the next one. Each of these functions has its own state, its own process, and runs in its own time. 
+
 
 
 

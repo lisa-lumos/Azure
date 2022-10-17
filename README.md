@@ -13,7 +13,7 @@
 - keywords: `Regions`, `Resource Groups`, `Storage Accounts`, `SLA (Service Level Agreement)`, `Cost`, `Setting Budget`, `Architects and the Cloud`
 
 ## 5. Azure Compute
-- keywords: (Placeholder)
+- keywords: `Virtual Machines`, `VM Scale Set`, `App Services`, `Azure Kubernetes Services (AKS)`, `Azure Functions`
 
 ## 6. Azure Networking
 - keywords: (Placeholder)
@@ -33,8 +33,8 @@
 ## 11. Security in Azure
 - keywords: `VM Security Best Practices`, `Networking Security Best Practices`, `Database Security Best Practices`, `App Service Security Best Practices`, `KeyVault`, `Microsoft Defender for the Cloud`
 
-## 12. Diascter Recovery (DR) in Azure
-- keywords: `Disaster recovery`, `Hot DR`, `Cold DR`, `Recovery Point Objective (RPO)`, `Reovery Time Objective (RTO)`, `Routing in DR`, `Azure Traffic Manager`, `Azure Front Door`
+## 12. Disaster Recovery (DR) in Azure
+- keywords: `Disaster recovery`, `Hot DR`, `Cold DR`, `Recovery Point Objective (RPO)`, `Recovery Time Objective (RTO)`, `Routing in DR`, `Azure Traffic Manager`, `Azure Front Door`
 
 ## 13. Managing Cost in Azure
 - keywords: `Azure Cost Management`
