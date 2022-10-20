@@ -23,6 +23,18 @@ the same VNet, it can be customized.
 
 Each Subnet gets a share of the parent VNet’s IP Range. You should NEVER use the full range of the VNet in a Subnet, otherwise it would be extremely hard to modify this subnet range later, which then makes it hard to add future Subnets. 
 
+For example, you can create two VMs under different subnets in one VNet, and then you can rdp within one VM to another VM using the private IP address of the second VM. 
+
+### Network Security Group (NSG)
+It is a gatekeeper for Subnets and defines who can connect in and out of subnet. It can be thought of as a mini-firewall. NSG should be a standard part of Subnet creation. NSG is free. 
+
+NSG looks at 5 tuples: Source (Where did the connection come from), Source Port (The port the source is using), Destination (Where does the connection request goes), Destination Port (To which port does it want to connect), Protocol (TCP, UDP, Both). Based on these 5 tuples the connection is either allowed or denied (called Security Rule). Each rule is assigned a number, the lower the number – the higher the priority of the rule. 
+
+An NSG is automatically created and attached to every newly created VM’s network interface. By default, open RDP (on Windows) or SSH (on Linux) port to
+anyone, and this MUST be handled first thing after creation. 
+
+
+
 ## 🏷 Load Balancer
 
 ## 🏷 Application Gateway

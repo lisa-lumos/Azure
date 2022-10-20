@@ -139,6 +139,32 @@ Now the two functions are in the function app in Azure. You can click on the fir
 ## Current architecture
 <img src="images/architecture4.png" style="width: 70%">
 
+## Readit VNet
+If we look at the two VMs that we have deployed, notice that their subnet is called default in the readit-app-vnet VNet. Recall that the catalog vm could talk with the weather vm, this is because both machines are in the same VNet. Click on this VNet in the overview page of the VM, it will bring us to the overview page of this VNet. See the address space shows: 10.0.0.0/16, which means only first two numbers are fixed, and the latter two number can be used for network devices in this VNet. If we navigate to the Connected devices page, then we can see the IP address of the two VMs: 10.0.0.4 and 10.0.0.5. If navigate to the subnet page, will see that there's a single subnet called "default", with IP range of 10.0.0.0/24, which is a subset of the VNet it belongs to. 
+
+The Address space of the VNet can be edited by going to the Address space pane of this VNet. Also, you can create new subnets in this VNet by going into the Subnets pane. Note that for each subset, Azure reserves 5 out of its range. 
+
+To create a new VNet, search virtual network in the portal, and click create. If this is only for testing, you can put it into a new rg, so it is easy to delete later. During the creation of VNet, you can define a few subnets inside, with different names and ranges. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
