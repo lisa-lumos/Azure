@@ -146,12 +146,15 @@ The Address space of the VNet can be edited by going to the Address space pane o
 
 To create a new VNet, search virtual network in the portal, and click create. If this is only for testing, you can put it into a new rg, so it is easy to delete later. During the creation of VNet, you can define a few subnets inside, with different names and ranges. 
 
+## Set up NSG for the Catalog VM
+Start this VM so could test it later. Go to the "Networking" pane, the list of Inbound port rules and Outbound port rules shows the NSG rules that are attached to this VM. It also shows that the NSG attached to this VM impacts 0 subnets, and 1 network interfaces (this VM). By default, Azure creates 4 rules in this NSG from slow priority to top priority: DenyAllInBound, AllowAzureLoadBalancerInBound, AllowVnetInBound (allows peering from other vnets in Azure), RDP (currently allows all traffic in). Click on the RDP rule to edit it. To get your current IP, just Google it. For the Source field, select IP Addresses, and in the Source IP addresses field, type your current IP. And click save. 
 
+Recall that we cannot connect to the catalog VM from another machine. This is because there is no NSG rule that specifies allowing connection to 8080 port. To allow anyone (customers) to browse to this port, Click Add Inbound port rule, note that Azure automatically adds 8080 to the Destination port ranges field. Select only TCP as the Protocol, and add description in the Description field as "Allows browsing to the catalog app", and save. Now copy the public IP of this VM, and append :8080 to it, and open it in browser. Now we can see the catalog app from other than the VM. 
 
+## Set up NSG for the Weather API
+Perform the same steps for modifying the current SSH rule to it only accessible from your IP address. 
 
-
-
-
+## Move the Weather API to a new subnet
 
 
 
