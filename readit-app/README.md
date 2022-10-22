@@ -155,12 +155,13 @@ Recall that we cannot connect to the catalog VM from another machine. This is be
 Perform the same steps for modifying the current SSH rule to it only accessible from your IP address. 
 
 ## Move the Weather API to a new subnet
+Navigate to the weather-vm, and click on its VNet, and go to the subsets pane, and create a new Subnet. Name: weather-subnet, Network security group: leave it empty (Note in the dropdown menu, weather-vm-nsg is the one that we modified in the previous session. It was created automatically when this VM was created). Click save. 
 
+The next step is to move the weather VM into this newly created subnet. Go to the Networking pane in the weather-vm, and click on the name of the Network Interface. Go to the IP configurations pane under Settings, and select the new subnet in the Subnet dropdown list. Note that the vm will restart if we change the subnet that it lives in. Click Save. 
 
+To create a new nsg to attach to the new subnet, in the portal, search networks security group. Click Add. Resource group: readit-app-rg, Name: weather-subnet-nsg, Region: west europe. And create. Go to this resource, navigate to the Inbound security rules, see that there's no ssh rule attached to this nsg by default, this is because this nsg is not created during the creation of a linux vm. Navigate to the Subnets pane, click Associate, and select readit-app-vnet as the Virtual network, and then the weather-subnet as the Subnet. Hit Ok.  
 
-
-
-
+Next, add SSH allowing nsg rule into this nsg, so we could ssh to the VM inside the subnet. This is because although the nsg of the vm allows ssh, but the nsg of the subnet that the vm lives in doesn't allow ssh. Click Add, Source: IP Address, Source IP addresses/CIDR ranges: (your IP), Destination port ranges: 22, Protocol: TCP, Name: SSH. Click Add. 
 
 
 

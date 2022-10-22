@@ -33,6 +33,25 @@ NSG looks at 5 tuples: Source (Where did the connection come from), Source Port 
 An NSG is automatically created and attached to every newly created VM’s network interface. By default, open RDP (on Windows) or SSH (on Linux) port to
 anyone, and this MUST be handled first thing after creation. 
 
+NSG tip: In addition to setting up security rule per IP (as we did in the demo), you can also set up rules that use `Service Tags`. These service tags represent well known sources which can be used in the rule, and you don't have to know their IP address. Common Service Tags are:
+- Internet: All the requests coming from the internet
+- VirtualNetwork: Requests coming from other Azure's Virtual Networks (this service tag is used by the default rule created for every NSG)
+- LoadBalancer: Requests coming from Azure Load Balancer (this service tag is used by the default rule created for every NSG)
+- AzureMonitor: Requests coming from Azure Monitor, and are used for monitoring the app
+- ...
+
+It's recommended to use Service Tags when your rule applies to built-in resources, and not resources created by you.
+
+### Network Peering
+Sometimes, to increase security, we want to place some resources in a completely different VNet, not just different subnets. e.g.: 
+- Separate systems
+- System layers (front end and back end)
+- Sensitive databases
+
+The main reason is that we should not place non-public resources in a VNet that has public access. Doing this avoids the case when the user finds a way to bypass the front end vm to reach to the database directly. 
+
+Network Peering allows two VNets to connect to each other. From the user’s point of view it’s a single VNet. To make peering possible, we should make sure address spaces are not overlapped. And we should always use NSG for protection. Peering can work across Regions. And it is not free (pay by the traffic volume in GB for both inbound and outbound). 
+
 
 
 ## 🏷 Load Balancer
