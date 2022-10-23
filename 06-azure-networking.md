@@ -52,6 +52,7 @@ The main reason is that we should not place non-public resources in a VNet that 
 
 Network Peering allows two VNets to connect to each other. From the user’s point of view it’s a single VNet. To make peering possible, we should make sure address spaces are not overlapped. And we should always use NSG for protection. Peering can work across Regions. And it is not free (pay by the traffic volume in GB for both inbound and outbound). 
 
+### Network Topology
 
 
 ## 🏷 Load Balancer

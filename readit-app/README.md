@@ -163,15 +163,27 @@ To create a new nsg to attach to the new subnet, in the portal, search networks 
 
 Next, add SSH allowing nsg rule into this nsg, so we could ssh to the VM inside the subnet. This is because although the nsg of the vm allows ssh, but the nsg of the subnet that the vm lives in doesn't allow ssh. Click Add, Source: IP Address, Source IP addresses/CIDR ranges: (your IP), Destination port ranges: 22, Protocol: TCP, Name: SSH. Click Add. 
 
+## Move the Weather API to a new VNet
+Create a new VNet, note should not overlap with the address space of the current vnet. Go to Virtual Networks page in the Portal and click Create. Resource group: readit-app-rg, Name: weather-vnet, Region: west-europe. Go to the IP Addresses pane in the create page, and can see that the IPv4 address space that Azure shows there is not overlapped with the existing vnets. Modify the name of the default subnet to weather-subnet. Click Create. 
 
+Next, need to move the weather API to this new VNet. Recall that to move the vm from one subnet to another, it was a lot easier - you just select this subnet. But moving a vm from one vnet to another is more complicated - we need to delete the weather VM and create it in the new vnet. 
 
+Go to the weather vm, and click Delete. In the delete page, uncheck OS disk (so it can be used as the base for a new VM), check Network interfaces and Public IP addresses to delete both of them. Click Delete. 
 
+In the portal, search disks, we can see the weather-vm disk1 has no Owner, while our catalog-vm disk is attached to the catalog-vm as Owner. Click on the weather-vm disk, and click Create VM. In the Create VM page, note that the Image field is already pre-populated with this disk. Virtual machine name: weather-vm, go to the Disks pane, note you cannot change OS disk type this time, because it already exists. In the Networking pane, Virtual network: weather-vnet, subnet: (defaulted to the only subnet in this vnet), Public IP: (note that catalog vm is connecting to weather vm using Azure network, not using the public IP. But we still need it to have a Public IP because we need to ssh to this machine to start the weather api) so create a public IP, and SKU: Basic, Assignment: Static. In the Management pane, Enable auto-shutdown: check, Notification before shutdown: uncheck. And Create. Note that Azure didn't ask us the credentials for this machine, this is because these credentials are already stored in the disk. 
 
+Go to Resource, in the Overview page, see that the Virtual network/subnet: weather-vnet/weather-subnet. Go to the Networking pane, and modify the SSH rule to allow your IP only. Copy the public IP of this VM, and ssh to it and start the weather API. 
 
+Now if we start the catalog vm and open the catalog app using its public IP, and go to the Weather page, and put in the weather vm private IP appending :8080, we cannot reach the weather API - because the two vms live in different vnets now. 
 
+## Peering of the two vnets
+Under the Networking pane of weather vm, click the hyperlink in network/subnet: weather-vnet/weather-subnet to go to the virtual network page. Go to the Peerings pane, click Add. This virtual network: Peering link name: readit-peering, Remote virtual network: Peering link name: weather-peering, Virtual network: readit-app-vnet. Click Add. Can see that Azure is adding two peerings, one from weather-vnet to readit-app-vnet, and one vise versa. 
 
+Now if we start the catalog vm and open the catalog app using its public IP, and go to the Weather page, and put in the weather vm private IP appending :8080, we can reach the weather API. 
 
+Just by defining the peering, the connection now works. We wonder why the NSGs did not block this connection. Go to the Networking pane of the weather vm, see that there is a rule called AllowVnetInBound - a default rule that allow traffic from VNets in Azure. 
 
+As a test, to prevent anyone to use this VM at port 8080, click Add inbound port rule, Action: Deny. Click Save. Verify that is did prevent using weather API even from catalog VM. What we really want is to only allow traffic from this catalog vm, and block all the rest. Click on the rule we just created, and Source: IP Addresses, Source IP addresses/CIDR ranges: private IP of catalog vm, Action: Allow, Protocol: TCP, Description: Allow catalog VM to access the weather API. Hit Save. 
 
 
 
