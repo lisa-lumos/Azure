@@ -185,6 +185,7 @@ Just by defining the peering, the connection now works. We wonder why the NSGs d
 
 As a test, to prevent anyone to use this VM at port 8080, click Add inbound port rule, Action: Deny. Click Save. Verify that is did prevent using weather API even from catalog VM. What we really want is to only allow traffic from this catalog vm, and block all the rest. Click on the rule we just created, and Source: IP Addresses, Source IP addresses/CIDR ranges: private IP of catalog vm, Action: Allow, Protocol: TCP, Description: Allow catalog VM to access the weather API. Hit Save. 
 
-
+## Current Architecture
+<img src="images/architecture5.png" style="width: 70%;">
 
 

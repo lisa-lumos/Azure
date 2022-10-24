@@ -53,6 +53,17 @@ The main reason is that we should not place non-public resources in a VNet that 
 Network Peering allows two VNets to connect to each other. From the user’s point of view it’s a single VNet. To make peering possible, we should make sure address spaces are not overlapped. And we should always use NSG for protection. Peering can work across Regions. And it is not free (pay by the traffic volume in GB for both inbound and outbound). 
 
 ### Network Topology
+With growth of system, it is hard to remember which resource lives in which subnet and which VNet, `Network Watcher` comes to rescue. Search for it in the portal, and in the Topology pane, Resource Group: readit-app-rg, it will show the current topology of our app. Another useful thing in the Network Watcher is the `Connection troubleshoot` pane - it allows you to check whether two resources in Azure could connect to each other, if cannot, why the connection is blocked. 
+
+### Secure VM Access
+Public APIs are considered attack surface, so hackers can hack into the VMs and cause data breach or shutdown the entire system. 
+
+The larger the attack surface, the greater the risk. Having multiple public IPs exposed to the network increases the security risk, so we want to minimize it as much as possible. Always try to avoid leaving public IPs open, although we cannot always avoid it. To minimize the risk of public IPs being exposed to the internet, there are 4 techniques:
+- JIT Access (Just In Time Access): Opens the port for access on demand, and automatically closes it when not using. Can be configured from the VM’s Configuration pane in the portal. Requires Azure Security Center License upgrade
+- VPN: A secure tunnel to the VNet. Can be configured so that no one else can connect to the VNet. Requires VPN software and license (not part of Azure), so it is often complicated an expensive. 
+- Jump Box: Place another VM in the same VNet, and allow access ONLY to this VNet. When need to access one of the other VMs – connect to this one first, and connect from it to the relevant VM. Only one port is open (still kind of a problem...). Cost: The additional VM (the Jump Box)
+- Bastion: A web-based connection to the VM. No open port is required. Simple and secure. Cost: ~140$/month
+
 
 
 ## 🏷 Load Balancer
