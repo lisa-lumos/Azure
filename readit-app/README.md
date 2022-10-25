@@ -188,4 +188,30 @@ As a test, to prevent anyone to use this VM at port 8080, click Add inbound port
 ## Current Architecture
 <img src="images/architecture5.png" style="width: 70%;">
 
+## Add Bastion to the catalog-vm
+Search for bastion in the portal, and click Create Bastion. Resource group: readit-app-rg, Name: readit-bastion, Region: West Europe, Virtual network: readit-app-vnet, Subnet: (create a new subnet called AzureBastionSubnet). Create. This creates two resources: the bastion itself, and its public IP address. 
+
+Go to the catalog-vm, in the Networking pane, Delete the nsg rule for RDP. In the Connect pane, select the BASTION tab, click Use Bastion. Type in the Username and Password for the VM login, and click Connect, now can see the vm screen open in the webpage in a new tab. This useful if we want to connect to VM but want to keep rdp/ssh port closed. 
+
+To remove Bastion, go to its Overview page, and click Delete. Add back the RDP rule to the VM, and delete the public IP that was created with the Bastion. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

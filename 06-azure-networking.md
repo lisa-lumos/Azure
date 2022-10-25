@@ -64,6 +64,30 @@ The larger the attack surface, the greater the risk. Having multiple public IPs 
 - Jump Box: Place another VM in the same VNet, and allow access ONLY to this VNet. When need to access one of the other VMs – connect to this one first, and connect from it to the relevant VM. Only one port is open (still kind of a problem...). Cost: The additional VM (the Jump Box)
 - Bastion: A web-based connection to the VM. No open port is required. Simple and secure. Cost: ~140$/month
 
+#### Bastion
+Bastion downsides:
+- Cost
+- Requires portal access to access the VM (as of year 2022), while rdp/ssh do not require portal access.
+
+### Service Endpoint and Private Link
+Problem: A lot of managed services (Azure SQL Server, App Services, Storage, etc) expose public IP . Sometimes they are accessed only from resources in the cloud (e.g.: Database in the backend). They might pose a security risk.
+
+This problem can be solved by Service Endpoint (it is a legacy solution) - they create a route from the source VNet to the managed service, so the traffic never leaves Azure backbone, although the service still has a public IP (access from the internet can be blocked). They are extremely difficult to use from on-prem networks. Service Endpoint is free. Resources support Service Endpoint: Storage, SQL Database, Synapse Analytics, PostgreSQL, MySQL, Cosmos DB, KeyVault, Service Bus, Event Hub, App Service, Cognitive Services. 
+
+Steps to use Service Endpoint:
+- Enable Service Endpoint on the source Subnet
+- On the target resource, set the subnet as the source of traffic
+
+Private link is a better and newer solution to the problem - it extends the managed service to the source VNet, so traffic never leaves the VNet and the resources talks via private IP, and hence access from the internet will be blocked. Private Link can be used from on-prem networks. Private Link is not free. Resources support Private Link (much longer than service endpoint's): Storage, SQL Database, Synapse Analytics, PostgreSQL, MySQL, Cosmos DB, KeyVault, Redis, AKS, Search, ACR, App Configuration, Backup, Service Bus, Event Hub, Monitor, Relay, Event Grid, App Service, Machine Learning, Automation, IOT Hub, SignalR, Batch. 
+
+Steps to use Private Link:
+- Configure the resource to connect to the VNet. 
+- Configure private DNS, which handles the routing between resources. It is done automatically by Azure. Might cause a problem if you have your own DNS. 
+
+Service Endpoint VS Private Link:
+
+
+
 
 
 ## 🏷 Load Balancer
