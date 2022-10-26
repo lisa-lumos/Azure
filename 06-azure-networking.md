@@ -69,7 +69,7 @@ Bastion downsides:
 - Cost
 - Requires portal access to access the VM (as of year 2022), while rdp/ssh do not require portal access.
 
-### Service Endpoint and Private Link
+### Service Endpoint and Private Link (from VNet to a managed service)
 Problem: A lot of managed services (Azure SQL Server, App Services, Storage, etc) expose public IP . Sometimes they are accessed only from resources in the cloud (e.g.: Database in the backend). They might pose a security risk.
 
 This problem can be solved by Service Endpoint (it is a legacy solution) - they create a route from the source VNet to the managed service, so the traffic never leaves Azure backbone, although the service still has a public IP (access from the internet can be blocked). They are extremely difficult to use from on-prem networks. Service Endpoint is free. Resources support Service Endpoint: Storage, SQL Database, Synapse Analytics, PostgreSQL, MySQL, Cosmos DB, KeyVault, Service Bus, Event Hub, App Service, Cognitive Services. 
@@ -85,9 +85,18 @@ Steps to use Private Link:
 - Configure private DNS, which handles the routing between resources. It is done automatically by Azure. Might cause a problem if you have your own DNS. 
 
 Service Endpoint VS Private Link:
+|  | Service Endpoint | Private Link |
+| ----------- | ----------- | ----------- |
+| Security | Connects via Public IP | Connects via Private IP |
+| Simplicity | Very simple | More complex |
+| Price | Free | Not free | 
+| Supported services | Limited list | Large list, probably will get larger |
+| On-Prem connectivity | Quite complex | Supported | 
 
+### App Service VNet Integration (from app service to something inside VNet)
+Allows access from App Service to resources within VNet, so that these resources should not be exposed on the internet. Extremely useful when App Service needs access to a VM with some internal resources. Supports same-region VNets. For VNets in other regions – a gateway is required. 
 
-
+It is not available in free tier App Service Plan - needs standard tier. Navigate to the Scale up (App Service plane) pane, and click Production, then See additional options, choose S1 production tier. Go to the Networking pane, inside the Outbound Traffic box, click on VNet integration. Click Add VNet, and Virtual Network: readit-app-vnet, Subnet: (Can only connect to an empty subnet) AzureBastionSubnet. Could click OK to complete. After this test, revert back to F1 tier so it is cheaper. 
 
 
 ## 🏷 Load Balancer
