@@ -98,8 +98,22 @@ Allows access from App Service to resources within VNet, so that these resources
 
 It is not available in free tier App Service Plan - needs standard tier. Navigate to the Scale up (App Service plane) pane, and click Production, then See additional options, choose S1 production tier. Go to the Networking pane, inside the Outbound Traffic box, click on VNet integration. Click Add VNet, and Virtual Network: readit-app-vnet, Subnet: (Can only connect to an empty subnet) AzureBastionSubnet. Could click OK to complete. After this test, revert back to F1 tier so it is cheaper. 
 
+### App Service Access Restrictions
+Similar to NSG – but for App Services. Restricts traffic to the App Service. By default, all inbound traffic is allowed (in relevant ports 80 and 443), but with access restrictions, inbound traffic is restricted to the allowed IPs / VNets / Service Tag (such as load balancer, which is commonly used). 
+
+Main use cases:
+- Backend App Service that should be accessed from front end App Service / VM only
+- App Service that sits behind Application Gateway / Load Balancer, and shouldn’t be accessible directly
+- Open App Service to a specific customer only (less common)
+
+Steps: Go to the Networking pane of the app service, inside the Inbound Traffic box, click on Access restrictions. There's a single default rule sitting in there, which allows all traffic. (To add a rule that only allow for your IP address), Click Add rule, Name: my-ip, Action: Allow, Priority: 100, Description: Allow access from my IP, Type: IPv4, IP Address Block: (your IP), click Add rule. Note that a new rule is created automatically to deny all accesses, with a lower priority. Now other IP addresses trying to access the app service will get "403 forbidden" error. 
+
+
 
 ## 🏷 Load Balancer
+
+
+
 
 ## 🏷 Application Gateway
 
