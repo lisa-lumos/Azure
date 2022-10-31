@@ -117,11 +117,29 @@ Major use cases:
 
 To access this service, go to the app service you created before, and under Scale up (App Service plan) pane, select the Isolated (Advanced networking and scale) tab. 
 
-
 ## 🏷 Load Balancer
+Azure service that distributes load and checks health of VMs (When a VM is not healthy, no traffic is directed to it). It can work with VMs or Scale Set. Can be public (be accessible from the internet) or private (used only in a closed VNet). It operates at layer 4 (Transport layer, which is related to IP, Port, protocol, TLS, etc, has no knowledge about the actual content)of the OSI model which separates the connection components into different layers: 
 
+<img src="images/osi.png" styles="width: 50%">
 
+Ref: `https://learn.microsoft.com/en-us/windows-hardware/drivers/network/windows-network-architecture-and-the-osi-model`. 
 
+Load Balancer distribution algorithm is based on 5 tuple hash like those used in NSG: Source IP, Source port, Destination IP, Destination port, Protocol type.
+
+Load Balancer types:
+| Basic | Standard |
+| ----------- | ----------- |
+| No redundancy | Redundant |
+| Open by default | Secure by default |
+| Up to 300 instances  | Up to 1000 instances |
+| No SLA  | 99.99% SLA |
+| Free | Not Free |
+
+There are 4 main configurations for Load Balancer: Frontend IP configuration (public IPs exposed by the Load Balancer), Backend pools (the VMs connected to the Load Balancer), Health probes (checks the health of the VMs, run in intervals of  a few configurable seconds; can run on TCP, HTTP, HTTPS (standard only); can configure unhealthy threshold - how many times a check should fail to mark the VM as Down, default is 2; ), Load balancing rules (A rule connecting Frontend IP with Backend pool). 
+
+Health Probes runs on the VM's host, so no network traffic outside the host. The probes originate from the same IP: 168.63.129.16, and is allowed by default in NSG (the rule AllowAzureLoadBalancerinBound). 
+
+Load Balancer is great for internal resources, but do not use it for external resources (Especially on Web Apps / Web API / etc. For this we have the Application Gateway) Because it can’t handle HTTP, and doesn’t route based on path. Also, there is no protection for them. 
 
 ## 🏷 Application Gateway
 
