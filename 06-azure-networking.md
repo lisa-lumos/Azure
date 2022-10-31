@@ -108,6 +108,14 @@ Main use cases:
 
 Steps: Go to the Networking pane of the app service, inside the Inbound Traffic box, click on Access restrictions. There's a single default rule sitting in there, which allows all traffic. (To add a rule that only allow for your IP address), Click Add rule, Name: my-ip, Action: Allow, Priority: 100, Description: Allow access from my IP, Type: IPv4, IP Address Block: (your IP), click Add rule. Note that a new rule is created automatically to deny all accesses, with a lower priority. Now other IP addresses trying to access the app service will get "403 forbidden" error. 
 
+### ASE (App Service Environment)
+Special type of app service deployed directly to a dedicated VNet. This VNet can be configured like any other VNet – Subnets, NSGs, etc. It is created on dedicated hardware, and is quite expensive.
+
+Major use cases:
+- Elevated security – complete isolation
+- Very high scale requirements
+
+To access this service, go to the app service you created before, and under Scale up (App Service plan) pane, select the Isolated (Advanced networking and scale) tab. 
 
 
 ## 🏷 Load Balancer
