@@ -142,15 +142,17 @@ Health Probes runs on the VM's host, so no network traffic outside the host. The
 Load Balancer is great for internal resources, but do not use it for external resources (Especially on Web Apps / Web API / etc. For this we have the Application Gateway) Because it can’t handle HTTP, and doesn’t route based on path. Also, there is no protection for them. 
 
 ## 🏷 Application Gateway
+It is a web traffic load balancer - can function as the external endpoint of the web app. It Works with: VMs, VM Scale Sets, App Services, Kubernetes (requires some extra work). It is similar to the Load Balancer, but has additional features, such as SSL Termination, Autoscaling, Zone redundancy, Session affinity, URL based routing (very important! Not in load balancer), WebSocket and HTTP/2 support, Custom error pages, Header & URL rewrite, WAF, etc. It operates at layer 7 (Application layer) of the OSI model. 
 
+One of the most important capabilities of the Application Gateway is the Web Application Firewall (WAF). It protects web apps against common attacks such as Cross-site scripting, SQL injection, etc. Protection rules are based on OWASP Core Rule Set, and updates continuously. WAF works in Detection (notify only) or Prevention (block and notify) mode. Many organizations have their own WAF deployment, usually based on 3rd party products (Palo Alto, Fortinet, Imperva etc.) In these cases – there’s no need for the WAF in the Application Gateway (only need to use it as is).
 
+Application Gateway comes with two flavors: 
+- Standard_V2 – includes all the features mentioned, excluding WAF
+- WAF_V2 – Includes everything (almost double the price…)
 
+Application Gateway is placed in its own Subnet, and often in its own VNet. Therefore, we must make sure the backend resources are accessible from the Application Gateway Subnet, but not accessible from anywhere else. For VM sitting in another VNet, this means modifying the NSG rules. And for App Service, it means using Service Endpoint + Access Restrictions, or Private Link. 
 
-
-
-
-
-
+Application Gateway has 5 main configurations: Backend pools (The VMs, Scale Sets, or App Services connected to the Application Gateway), HTTP settings (Settings for the incoming HTTP requests, not there in load balancer), Frontend IP configurations (The public IP exposed by the Application Gateway), Listeners (Receives requests on a specific port and protocol), Rules (a rule connecting Listener with a Backend pool). 
 
 
 
