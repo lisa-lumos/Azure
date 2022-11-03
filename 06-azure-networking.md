@@ -154,7 +154,7 @@ Application Gateway is placed in its own Subnet, and often in its own VNet. Ther
 
 Application Gateway has 5 main configurations: Backend pools (The VMs, Scale Sets, or App Services connected to the Application Gateway), HTTP settings (Settings for the incoming HTTP requests, not there in load balancer), Frontend IP configurations (The public IP exposed by the Application Gateway), Listeners (Receives requests on a specific port and protocol), Rules (a rule connecting Listener with a Backend pool). 
 
-
+Expect the cost to be ~$200/month at least. 
 
 
 

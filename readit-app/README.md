@@ -195,8 +195,8 @@ Go to the catalog-vm, in the Networking pane, Delete the nsg rule for RDP. In th
 
 To remove Bastion, go to its Overview page, and click Delete. Add back the RDP rule to the VM, and delete the public IP that was created with the Bastion. 
 
-
-
+## Add Application Gateway
+In the portal, search for Application Gateway. Click Add. Subscription: default, Resource group: readit-app-rg, Application gateway name: readit-app-gw, Region: West Europe, Tier: Standard-V2, Enable autoscaling: No, Instance count: 1, Availability zone: None, HTTP2: Disabled, Virtual network: (Create new, Name: readit-app-gw-vnet, make sure the Address range will not overlap with the range of the readit-app-vnet. Subnet name: gw-subnet), Next, Frontend IP address type: Public, Public IP address: (Add new, Name: readit-ip. It is going to be static),Next, Add a backend pool, Name: inventory-pool, Target type: App Services, Target: readit-inventory. Add. Add a backend pool, Name: catalog-pool, Target type: Virtual machine, Target: (cannot fill up now, because this VM lives in another VNet, so select Yes to Add backend pool without targets. So we could set it up later). Add. Next. Will need to add two routing rules, one for catalog, one for inventory. Click Add a routing rule, Rule name: catalog-rule, in the listener pane: Listener name: catalog-listener, Frontend IP: Public, Frontend IP Protocol: HTTP, Port: 8080, in the Backend targets pane: Target type: Backend pool, Backend target: catalog-pool, HTTP settings: (add new, HTTP settings name: catalog-settings, Backend protocol: HTTP, Backend port: 8080, Add) Do the same for inventory rule, but Port: 80. 
 
 
 
