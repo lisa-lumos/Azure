@@ -203,9 +203,10 @@ Go the the Application gateway, click Backend health in the Monitoring pane, now
 
 In order for the application gateway to be effective, need the backend service to be only accessible from the application gateway, not from anywhere else. In the Overview page, click on the value of the Virtual network/subnet, and click Service endpoints under the Settings pane. Add, Service: MicrosoftWeb, Subnets: gw-subnet. Next, define this Service endpoints at the App service side. Go the the readit-inventory-lisa app service, click Networking under the Settings pane, Access restriction -> Add rule, Name: gw-access, Priority: 100, Description: Allow access from the GW service endpoint. Type: Virtual Network, Virtual Network: readit-appgw-vnet, Subnet: gw-subnet, Add rule. To test it, go to Overview, and copy the value of URL. 
 
+## Connecting the Catalog VM to the Application Gateway
+First step is to define the peering. Go to the Overview page of the catalog-vm, and click on the value of Virtual network/subnet, click Peerings under Settings pane, Add, This virtual network: Peering link name: appgw-peering, Remote virtual network: Peering link name: catalog-peering, Virtual network: readit-appgw-vnet, Add. Application gateway is going to route traffic to the Private IP address o the VM, as it shouldn't be accessed via the Public IP address. So, copy the Private IP address of the VM and go back to the Overview page of the application gateway. Click on Backend pools under the Settings pane. Click the catalog-pool, and paste the Private IP address to the Target field. Save. Before go testing, want to ensure that the backend is healthy - go to the Backend health under the Monitoring pane, it shows both the backend pools are healthy. To test it, go to Overview, copy the value of Frontend public IP address, and navigate to value:8080 in browser. 
 
-
-
+For security of the VM, go to the Networking under Setting pane. Delete the security rule that allows traffic through port 8080 from anywhere. The rule named AllowVnetInBound allows for the traffic from application gateway. 
 
 
 
