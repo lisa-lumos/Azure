@@ -208,7 +208,8 @@ First step is to define the peering. Go to the Overview page of the catalog-vm, 
 
 For security of the VM, go to the Networking under Setting pane. Delete the security rule that allows traffic through port 8080 from anywhere. The rule named AllowVnetInBound allows for the traffic from application gateway. 
 
-
+## Current Architecture
+<img src="images/architecture6.png" style="width: 90%;">
 
 
 

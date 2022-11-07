@@ -156,19 +156,28 @@ Application Gateway has 5 main configurations: Backend pools (The VMs, Scale Set
 
 Expect the cost to be ~$200/month at least. 
 
+### Application Gateway and AKS
+There is no built-in integration with AKS, because AKS has kind-of gateway (services). There’s Application Gateway Ingress Controller (AGIC) that does this, but it is in preview mode, quite buggy, not recommended. Better use 3rd party products. 
 
+### Application Gateway and Functions
+Functions Apps are basically App Services - so they can be protected by Application Gateway the same way the App Services are. We can configure Functions in Backend pool, then we can configure Access Restrictions to these Function apps so they can only be accessed from the Application Gateway. 
 
+### Affinity
+Affinity is a special setting in Application Gateway. It is located in the Add HTTP setting page in the portal, Under Additional settings pane. Cookie-based affinity: Disable. (Disable is the best setting for Affinity). Affinity makes sure the user will always be directed to the same instance (VM/App Service) it began with, even if the machine is overloaded. So it should be avoided when possible. Affinity is usually required in Stateful apps, and is usually a sign of bad design. Always try to design Stateless app. 
 
+The Stateless architecture pattern is one of the most important patterns in software architecture. Stateless means the applications state is stored in only two places - the data store and the user interface, and no state is stored in the application code. State means application's data, either temp or consistent. 
 
+A stateful example: User Interface -> Send user_id/pwd -> Login Service -> check credentials exists in Database -> Login Service stores user for future use (Data stored in code = stateful)
 
+A stateful app can hardly achieve redundancy and scalability. 
 
+### Application Gateway and Cookies
+This topic is super advanced, and it is likely that you never need to deal with this issue. For example, if user access website via domain name, the goes to DNS server to Application Gateway, then reaches the App Service. Suppose this App Service returns a cookie to the user with the domain name of the App Service (XXX.azurewebsites.net). Now we have a mismatch between the website domain name and the App service domain name. In this way, this cookie will be dropped by the browser, and hence any cookie related service such as login, will not work. So if you website use cookies, and you also use Application Gateway, you must be aware of this problem. 
 
+The solution to this problem is to set custom domain for the App Service to be the same one of the Application Gateway. It can be done in the portal using Custom domains page under Setting pane in the app service. 
 
-
-
-
-
-
+## Secure Network Design
+Application Gateway should live in its own VNet, and each layer in the application should have its own VNet. VNets are connected through peering through NSG. This network design pattern is called Hub and Spoke. 
 
 
 
