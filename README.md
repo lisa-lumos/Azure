@@ -16,10 +16,10 @@
 - keywords: `Virtual Machines`, `VM Scale Set`, `App Services`, `Azure Kubernetes Services (AKS)`, `Azure Functions`
 
 ## 6. Azure Networking
-- keywords: (Placeholder)
+- keywords: `VNets (Virtual Networks)`, `SubNets`, `Load Balancer`, `Application Gateway`, `Secure Network Design`
 
 ## 7. Data in Azure
-- keywords: (Placeholder)
+- keywords: `Azure SQL`, `Cosmos DB`, `Azure MySQL`, `Azure PostgreSQL`, `Azure Storage`, `Redis Cache`
 
 ## 8. Messaging in Azure
 - keywords: `Storage Queue`, `Service Bus`, `Event Grid`, `Event Hubs`
