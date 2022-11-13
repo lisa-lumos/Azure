@@ -9,6 +9,7 @@ What to look for when selecting a database:
 Note that we always have the choice to install database on a VM (Azure VMs can be setup with database software). There are also ready-made VMs in the marketplace that comes with pre-installed databases, such as Oracle Database. The advantage of having database on VM is that you will have full flexibility and control to do whatever you wish. The disadvantage is that you need to take care of everything, such as SLA, updates, availability, security, backups, etc.  
 
 ## Azure SQL
+Managed SQL Server on Azure, works like any other SQL Server using the same tools. Great compatibility with on-prem SQL Server (Depends on the exact Azure SQL Flavor). Offers built-in security, backups, availability and more. Flexible pricing models. 
 
 ## Cosmos DB
 
