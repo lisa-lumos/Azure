@@ -26,6 +26,8 @@ Has two compute tiers: Provisioned (Pay for allocated resources regardless of ac
 
 Pricing: Purchase model can be in terms of DTU or vCores. Roughly, one DTU = 1 vCore. With DTU purchase model, the service tier can be Basic, Standard, and Premium - they differ in terms of performance and SLA. With vCores purchase model, the service tier can be General Purpose, Business Critical, and Hyperscale - they can be either serverless or provisioned. 
 
+This is what most clients choose to use out of all 3 flavors. 
+
 ### Elastic Pool
 It is the second flavor of Azure SQL. It is based on Azure SQL, but allows storing multiple databases on single server. It is great for databases with low average utilization and infrequent spikes. For example, you have 4 databases that each have spikes at different times of the day, you can then put all these 4 dbs into a single server, because it is less likely that all of them will be spiking at a point in time and need more than what a server could provide. 
 

@@ -212,6 +212,16 @@ For security of the VM, go to the Networking under Setting pane. Delete the secu
 <img src="images/architecture6.png" style="width: 90%;">
 
 
+## Creating and connecting to Azure SQL
+In the Portal, search for sql, and click on SQL databases. Add. Resource group: readit-app-rg, Database name: readit-db, Server: (Create New, Server name: readitdbserver, and set the Server admin login username and Password, Location: West Europe), Want to user SQL elastic pool: No, Compute + storage: (Configure database, Basic, will const ~5$/mo with 5 DTUs and 2GB of storage, Apply), will not change anything in the Networking pane because we will change it later. Create. 
+
+Go to resource. In the Overview page, it shows that Status: Online, Server name: readitdbserver.database.windows.net. To look into the database and be able to query it, we could do it via VS Code. 
+
+Note that unlike VMs where anyone by default can access, Azure SQL has nothing open by default. To set up firewall and define the security rules for the db, go to Overview page of the db, and click on the Set server firewall in the top bar. Minimum TLS Version: >1.2 (because it is the most up-to-date version). Add client IP, so the current IP of your machine is added here. Click Save. 
+
+So need to install SQL Server (mssql) extension. Navigate to this extension, and under the CONNECTIONS tab, Add Connection, and paste the connection string of the db (can find it under the Connection strings under Settings tab for the db, copy the one that is under ADO.NET tab, which is the one that is used by most sql server tools), modify the Password in the connection string, and hit Enter key. Profile Name: readit DB. Note if forgot to set up security rules, we will get an message saying: "Your client IP address does not have access to the server. Add an Azure account and create a new firewall rule to enable access."  
+
+
 
 
 
