@@ -221,6 +221,31 @@ Note that unlike VMs where anyone by default can access, Azure SQL has nothing o
 
 So need to install SQL Server (mssql) extension. Navigate to this extension, and under the CONNECTIONS tab, Add Connection, and paste the connection string of the db (can find it under the Connection strings under Settings tab for the db, copy the one that is under ADO.NET tab, which is the one that is used by most sql server tools), modify the Password in the connection string, and hit Enter key. Profile Name: readit DB. Note if forgot to set up security rules, we will get an message saying: "Your client IP address does not have access to the server. Add an Azure account and create a new firewall rule to enable access."  
 
+## Connect the Catalog App to the database
+In the catalog app, inside the file appsettings.json, there is an entry for the BooksDB ConnectionStrings, so we could paste the connection string of the database into this place holder, and fill up the password. In the Startup.cs file, change the useInMemory boolean to false. In the command line, run 'dotnet tool install --global dotnet-ef', this installs the library that we use to connect to the database, then run 'dotnet ef migrations add InitialCreate' to create statements to be run against the database to create the required tables. Run 'dotnet ef database update' to create the table in the Azure SQL database. 
+
+Now we should expect that a table named Books with specified columns is created in the database. Click on the SQL Server plugin, and open the readit DB, under the Tables folder, we can see a new table named dbo.Books. Right click on this table and Select Top 1000, can see the result list is empty. 
+
+Hit F5 to run the code locally to open the app in the browser, click the Load Books to DB button, and now we expect to see these books in the Azure SQL database. So go back to VS Code, and click on the Execute Query button in the tool bar, and see all the books in the remote db. 
+
+Now stop the locally running app and go to Terminal to publish the app to the catalog VM. Run 'dotnet publish -o publish'. Go to the catalog vm and Start it. Use RDP to connect to the machine. Open IIS, catalog-vm -> Sites -> catalog -> On the right pane, Stop. Copy everything in the publish folder of the local catalog app into the catalog folder in the VM. Go back to IIS, and on the right pane, click Start. 
+
+Next, create another firewall rule to allow the catalog VM IP to connect to the db. sql db -> readit-db -> Overview -> Set server firewall -> add the catalog vm IP to Start IP and End IP, and name the rule as Catalog-VM. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
