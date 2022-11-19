@@ -232,7 +232,8 @@ Now stop the locally running app and go to Terminal to publish the app to the ca
 
 Next, create another firewall rule to allow the catalog VM IP to connect to the db. sql db -> readit-db -> Overview -> Set server firewall -> add the catalog vm IP to Start IP and End IP, and name the rule as Catalog-VM. 
 
-
+## Securing the Database Connection
+Connect the catalog app with the Azure SQL database via service endpoint. Go the catalog-vm, go to the Networking page under the Settings pane, click on the Virtual network/subnet hyper link to open the vnet, and click on Service endpoints. Before we used to configure service endpoints in the application gateway VNet, so it can connect to the app service. Click Add, Service: Microsoft.sql, Subnets: default, Add. In the Firewall settings of the database, click the Add existing virtual network link, Name: catalog-vnet, Virtual network: readit-app.vnet, Subnet name: default, OK. Remove the rule named Catalog-VM, because we don't need it anymore. Save. 
 
 
 
