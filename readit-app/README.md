@@ -235,7 +235,10 @@ Next, create another firewall rule to allow the catalog VM IP to connect to the 
 ## Securing the Database Connection
 Connect the catalog app with the Azure SQL database via service endpoint. Go the catalog-vm, go to the Networking page under the Settings pane, click on the Virtual network/subnet hyper link to open the vnet, and click on Service endpoints. Before we used to configure service endpoints in the application gateway VNet, so it can connect to the app service. Click Add, Service: Microsoft.sql, Subnets: default, Add. In the Firewall settings of the database, click the Add existing virtual network link, Name: catalog-vnet, Virtual network: readit-app.vnet, Subnet name: default, OK. Remove the rule named Catalog-VM, because we don't need it anymore. Save. 
 
+## Connecting the Inventory to the database
+Set up the inventory app service to work with the database. Open the inventory project in VS code, in the Index.cshtml.cs file, uncomment line 29 to 34. Update the connection string in appsettings.json, or, in the Configuration page of the inventory app, Under the Connection strings section, New connection string, Name: BooksDB, Value: paste here, Type: SWL Server. In this way, if we move the app services from on environment to the other, or if we switch databases, we can simply configure the connection to the database from here only, and we won't need to change the code. Then publish it to Azure. 
 
+In the Overview -> Set server firewall of the database, add a rule to allow connection from the inventory app service. 
 
 
 
