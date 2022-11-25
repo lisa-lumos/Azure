@@ -53,6 +53,38 @@ Pricing (have two tiers - general purpose, and business critical):
 - Business Critical -> Single Instance -> 8-80 vCores
 
 ## Cosmos DB
+Cosmos DB is a fully managed NoSQL database with amazing performance - <10ms for 99% of operations. It is globally distributed, and has fully automatic management (updates, scaling, fixes etc). You can choose multiple APIs to interact with it (SQL, Mongo, Gremlin, Azure Table, Cassandra (per account)). 
+
+Inside a Cosmos DB account, there are databases, with containers inside them. Inside containers, there are items that are JSON documents. 
+
+### Cosmos DB Availability
+It can be distributed across many regions (configurable), and the API automatically picks the closest one. When using write replication, SLA is 99.999%, which is the highest SLA in all Azure. All this availability are managed automatically, which no code changes required. 
+
+### Cosmos DB Backup
+Cosmos DB offers a full backup every 1-24 hrs (default is 4). The retention period is 20-30 days (default is 30). 
+
+### Cosmos DB Security
+IP firewall rules, Service Endpoints, Private Endpoints, Azure AD Authentication, Secure communication (TLS), Data encrypted by default
+
+### Cosmos DB Partitions
+Data items are divided to partitions (Logical group of items based on a specific property). E.g.: In a cars database, the Model can be a partition property. 
+
+Partitions are the basic scale unit in Cosmos DB - Distribution and scale are per partitions. We need to make sure items are divided as evenly as possible. It’s extremely important to select the right partition property, because it cannot be modified later on. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Azure MySQL
 
