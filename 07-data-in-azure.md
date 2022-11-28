@@ -71,17 +71,29 @@ Data items are divided to partitions (Logical group of items based on a specific
 
 Partitions are the basic scale unit in Cosmos DB - Distribution and scale are per partitions. We need to make sure items are divided as evenly as possible. It’s extremely important to select the right partition property, because it cannot be modified later on. 
 
+### Cosmos DB Consistency Levels
+Traditionally, in relational db, we have strong consistency - the call returns only after successful commit in all replicas (High availability). While with NoSQL db, we have eventual consistency - The call returns immediately, while commit in replicas happens later (Low latency). Generally, high availability is not equal to low latency, and we have to select between them. 
 
+But Cosmos DB offer 5 consistency levels:
+- Strong - As in regular relational db
+- Bounded Staleness
+- Session
+- Consistent Prefix
+- Eventual - As in regular NoSQL DBs
 
+The basic question with consistency is: if region A updates an item, and region B reads this item, which version will it get? 
 
+With Strong consistency, region B will get the last version of the item updated in region X - the versions of the same item in both regions will always be identical. This consistency level is used for mission critical data when we must makes sure that the data is replicated immediately across regions, and no different versions of the same data exist in the system. 
 
+With Bounded Staleness consistency level, region B will lag behind region A by k versions or t time. For example, the gap will never be larger than 3 versions. This consistency level keeps the order of the versions. It is used for low write latency and when order is important. 
 
+With Session consistency level, in a client session, we have strong consistency, but for other clients, they will have the Consistent Prefix (sometimes Eventual) consistency level. 
 
+The Consistent Prefix consistency level keeps the order of the versions, but there is no guarantee of the lag size (as opposed to Bounded Staleness). It is used for low write latency and when reads are infrequent. 
 
+The Eventual consistency level provides no order guarantee, and no guarantee of the lag size. It can be used for the count of retweets, likes, etc, when there's no problem if the numbers fluctuate a bit. 
 
-
-
-
+For Cosmos DB, the consistency levels can be configured at the account level, and can be relaxed on the request level. Not the word "Relaxed" - you cannot use a stronger consistency level at the request level, but you can use a weaker consistency level on the request level. There are no other dbs that offer such variety of consistency levels. 
 
 
 
