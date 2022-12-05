@@ -48,7 +48,7 @@ Performance: 10m events/sec, or 5k events/sec/topic.
 
 Latency: subsecond end-to-end latency in the 99th percentile. 
 
-Pricing: Based on num of operations - first 100k operations are free. 
+Pricing: Based on num of operations - first 100k operations/month are free. 
 
 When using event grid, create a topic (system/custom). 
 

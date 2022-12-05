@@ -95,8 +95,15 @@ The Eventual consistency level provides no order guarantee, and no guarantee of 
 
 For Cosmos DB, the consistency levels can be configured at the account level, and can be relaxed on the request level. Not the word "Relaxed" - you cannot use a stronger consistency level at the request level, but you can use a weaker consistency level on the request level. There are no other dbs that offer such variety of consistency levels. 
 
+### Cosmos DB Pricing
+Based on Request Unit (RU) per Second. 1 RU = Read (get item by its ID, not by query) item of size 1kb. Note that update, delete, insert, query is going to cost more than 1 RU. You can see the actual RU consumed in the response header of the results. 
 
+Beside RUs, the price is also based on operations type (Provisioned, Auto Scale, Serverless), write regions, num of provisioned RU/s. 
 
+Database operations: 
+- Provisioned - predefined num of RU/s, can be changed manually later. Offers reserved capacity of 65% discount. 
+- Auto Scale - set the maximum RU/s, Cosmos scales up to this number. It is good for unpredictable loads. 
+- Serverless - pay for what you use. In Preview currently, no SLA. 
 
 ## Azure MySQL
 
