@@ -105,6 +105,23 @@ Database operations:
 - Auto Scale - set the maximum RU/s, Cosmos scales up to this number. It is good for unpredictable loads. 
 - Serverless - pay for what you use. In Preview currently, no SLA. 
 
+### Creating and Using Cosmos DB
+In the portal, search Cosmos. Create -> Select a API among SQL (recommended), MongoDB, Cassandra, Azure Table, Gremlin (here I choose sql) -> Create -> Resource Group: readit-app-rg, Account Name: readit-cosmos-db-lisa, Location: West Europe, Capacity mode: Provisioned throughput, Apply Free Tier Discount: Apply, Uncheck the checkbox for Limit the total amount of throughput that can be provisioned on this account, because it will cause a lot of problems in deployment. -> Go the the networking pane, Connectivity method (who can connect to it): All networks. -> Go to the Backup Policy pane, can see the default backup settings, which is 4 hr interval, with 8 hrs retention, and geo-redundant. -> Review+Create -> Create. 
+
+Go to resource, in the Overview page, can see Read Locations and Write Locations. This is because you can have multi region deployment with Cosmos, which means data written in one region is also available for read at another region. There's a URI which will be used later. Go to the Firewall and virtual networks page under the Settings pane, we can define who can access cosmos db (default is All networks, means anyone can access). If you choose Selected networks, you can give an allowed IP address list that can access the cosmos db. 
+
+By far, what we have created is an Azure Cosmos Account, not a cosmos db. Open Data Explore page -> New Container -> Database id: Create new & name it as readit-orders, Database throughput (autoscale): Manual, with 400RU/s, Container id: orders, Indexing: Automatic, Partition key: /priority, -> OK. 
+
+Open the database readit-orders in the SQL API in the upper left corner, and can see a container named orders. 
+
+
+
+
+
+
+
+
+
 ## Azure MySQL
 
 ## Azure PostgreSQL
