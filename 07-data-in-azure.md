@@ -112,16 +112,26 @@ Go to resource, in the Overview page, can see Read Locations and Write Locations
 
 By far, what we have created is an Azure Cosmos Account, not a cosmos db. Open Data Explore page -> New Container -> Database id: Create new & name it as readit-orders, Database throughput (autoscale): Manual, with 400RU/s, Container id: orders, Indexing: Automatic, Partition key: /priority, -> OK. 
 
-Open the database readit-orders in the SQL API in the upper left corner, and can see a container named orders. 
+Open the database readit-orders in the SQL API in the upper left corner, and can see a container named orders. To add items to the container, click New Item in the top bar, add JSON structure, and Save. Cosmos automatically adds a few key-val pairs to the item, such as _id. Repeat this to add another item. 
+
+To query the db, click on the New SQL Query icon, and then you can query using sql syntax (although it is not a relational database). Such as:
+```sql
+select * from orders o; -- select all items
+
+select * from orders o -- select all items x with x.items.name is 'Rama II'
+where exists {
+  select value n 
+  from n in o.items
+  where n.name = 'Rama II'
+}
+```
+
+To edit the content (key or value or both) of an item in the UI, click on the item, modify the text and Update. Note that when we create the db, we used priority key as partition key. So we cannot delete this key-value pair. 
+
+Go to Keys page under Settings pane, can see two keys and two connection strings. This allows for using the second key when we need to replace the first key, to avoid downtime. 
 
 
-
-
-
-
-
-
-
+ 
 ## Azure MySQL
 
 ## Azure PostgreSQL
