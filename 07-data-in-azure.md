@@ -130,9 +130,33 @@ To edit the content (key or value or both) of an item in the UI, click on the it
 
 Go to Keys page under Settings pane, can see two keys and two connection strings. This allows for using the second key when we need to replace the first key, to avoid downtime. 
 
-
- 
 ## Azure MySQL
+Managed MySQL on Azure. Has great compatibility with on-prem MySQL database. Offers built-in security, backups, availability, etc. 
+
+Security: IP firewall rules, Service endpoints, Private endpoints, Regular & Azure AD Authentication, Secure communication (TLS), Data encrypted by default. 
+
+Backup (depends on Service Tier):
+- Basic: full back up daily.
+- General Purpose up to 4GB: full backup once a week, differential backup twice a day, transaction log backup: every 5min. 
+- General Purpose up to 16GB: full backup once db is created, differential backup once a day, transaction log backup: every 5min. 
+
+Retention Period: 7-35 days (7 is default). There is no native long term retention support as opposed to Azure SQL. 
+
+Availability: For basically tiers, back up stored locally; for General Purpose and Memory Optimized tiers, backup is stored in a geo-redundantly. SLA: 99.99%
+
+Pricing: 
+- Tier: 
+  - Basic - Require light computer and I/O performance (e.g.: for dev)
+  - General Purpose - Most business workloads
+  - Memory Optimized - for in-memory performance
+- Compute power (num of vCores)
+- Flexible Server deployment (in preview, not recommended)
+- Reservations exist. 
+
+### Creating and Using Azure MySQL
+
+
+
 
 ## Azure PostgreSQL
 
