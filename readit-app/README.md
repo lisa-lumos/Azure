@@ -240,6 +240,16 @@ Set up the inventory app service to work with the database. Open the inventory p
 
 In the Overview -> Set server firewall of the database, add a rule to allow connection from the inventory app service. 
 
+## Connecting the Orders Function to Cosmos DB
+We will use Cosmos DB as the orders database. The component that is responsible for handling orders is the function app. Open the order folder in VS code, in the ProcessOrderCosmos.cs file, uncomment line 18 and 25. In the local.settings.json file, add cosmosdb connection string. Run the code, so the app runs locally. Test the function locally. Copy the ProcessOrderCosmos post url to Postman, and copy the contents in orderssample.json file into the Body tab in Postman, select raw. After the request completes, we can see a new item in the cosmos db in the portal. Next, deploy the function app to Azure. Click the Azure plugin in VS code, navigate to the Local Project folder, and click the Upload icon. Select the readitfunctionapp, and Deploy. Click upload settings in the window.  
+
+Now go to the readitfunctionapp in the portal, go to the function ProcessOrderCosmos, and click Get Function Url. Use postman to do the same (add an item). To see function logs in real time, click on the Code + Test in the Developer pane in the function, and click Logs. 
+
+
+
+
+
+
 
 
 
