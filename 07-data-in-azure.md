@@ -154,11 +154,14 @@ Pricing:
 - Reservations exist. 
 
 ### Creating and Using Azure MySQL
+Search mysql in the portal. Create -> Single server, Create -> Resource group: mysql-rg, Server name: mytest-mysql, Region: West Europe, Version: 5.7, Compute _ storage: Configure server: Computer tier: Basic, Apply. Enter admin username and pwd -> Review + Create. 
 
-
-
+Go to resource. Look at Overview page. Go to Connection security page, Add client IP, Save. Pricing tier page shows current pricing. Connection strings page. Could use MySQL workbench to connect to Azure MySQL (Hostname is Server name in the Overview page in Portal, Username is Server admin login name in Overview page).  
 
 ## Azure PostgreSQL
+
+
+
 
 ## Azure Storage
 
