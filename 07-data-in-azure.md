@@ -159,9 +159,17 @@ Search mysql in the portal. Create -> Single server, Create -> Resource group: m
 Go to resource. Look at Overview page. Go to Connection security page, Add client IP, Save. Pricing tier page shows current pricing. Connection strings page. Could use MySQL workbench to connect to Azure MySQL (Hostname is Server name in the Overview page in Portal, Username is Server admin login name in Overview page).  
 
 ## Azure PostgreSQL
+Managed. Create compatibility with on-prem PostgreSQL db. Includes Hyperscale deployment. Offers built-in security, backups, availability, etc. 
 
+Security: IP firewall rules, Service endpoints, Private endpoints, Regular & Azure AD Authentication, Secure communication (TLS), Data encrypted by default. 
 
+Backup (depends on storage size):
+- Storage of 4GB: full backup once a week, differential backup twice a day, transaction log backup: every 5min. 
+- Storage of 16GB: full backup once db is created, differential backup thrice a day, transaction log backup: every 5min. 
 
+Retention Period: 7-35 days (7 is default). There is no native long term retention support for Azure PostgreSQL. 
+
+Availability: For basically tiers, back up stored locally; for General Purpose and Memory Optimized tiers, backup is stored in a geo-redundantly. SLA: 99.99%
 
 ## Azure Storage
 
