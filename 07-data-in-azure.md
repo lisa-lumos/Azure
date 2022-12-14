@@ -172,6 +172,41 @@ Retention Period: 7-35 days (7 is default). There is no native long term retenti
 Availability: For basically tiers, back up stored locally; for General Purpose and Memory Optimized tiers, backup is stored in a geo-redundantly. SLA: 99.99%
 
 ## Azure Storage
+Object store; massively scalable; accessible via HTTP/HTTPS; has client libraries for almost every language. Durable and highly available. 
+
+Azure storage types:
+- Blobs (Binary Large Object): Object store, great for files, videos, documents, large texts, etc. Up to 4.77 TB per file, and 190 TB in preview. Extremely cost effective. Scalable. Availability options. Often used in conjunction with SQL/NoSQL database. 
+- Files: File shares for cloud and on-prem deployments
+- Queues
+- Tables: NoSQL data store. Similar to CosmosDB, but less optimized for performance and availability, but cheaper. 
+- Disks: Storage volumes for Azure VMs, managed by VM
+
+Security: IP firewall rules, Service endpoints, Private endpoints, Shared Access Signatures, Access Keys & Azure AD Authentication, Secure communication (TLS), Data encrypted by default. 
+
+Containers are logical groups of blobs. 
+
+Azure Blobs has 6 options for storage redundancy. 
+- Locally Redundant Storage (LRS). Data is synchronously copied 3 times within the same zone
+- Zone Redundant Storage (ZRS). Data is synchronously copied to 3 zones in the Region. Only available to region with these zones. 
+- Geo Redundant Storage (GRS). Data is synchronously copies 3 times within the same zone, then copied asynchronously to paired region. Data in the secondary region is accessible only after failover process
+- Geo-Zone Redundant Storage (GZRS). Combination of GRS and ZRS. 
+- Read Access - Geo Redundant Storage (RA-GRS). GRS with read-access data in the secondary region (without initiating failover)
+- Read Access - Geo-Zone Redundant Storage (RA-GZRS).GZRS with read-access data in the secondary region (without initiating failover)
+
+Azure Blobs Storage failover can be initiated via:
+- Portal
+- Azure CLI
+- PowerShell
+
+Blobs are uploaded to one of the 3 tiers:
+- Hot. For data accessed frequently, has best SLA (99.9%, improves to 99.99% using RA-G(Z)RS), with highest storage costs and lowest access costs. E.g.: Photos to display, documents to show. 
+- Cool. For data accessed infrequently, has lower SLA (99%, improves to 99.9% using RA-G(Z)RS), with lower storage costs and higher access costs. Must be stored for at least 30 days (or early deletion fees applied). E.g.: Short term backup, data for future processing. 
+- Archive. Stored offline, no SLA - can take hours to retrieve. Has lowest storage costs and highest access costs. Must be stored for at least 180 days (or early deletion fees applied). Do not support ZRS, GRS, and RA-GRS redundancy. 
+
+Note that tier is set a account level, but can be modified per blob. Moving between tiers can be automated by lifecycle rules. 
+
+
+
 
 
 ## Redis Cache
