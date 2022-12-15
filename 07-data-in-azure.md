@@ -205,7 +205,16 @@ Blobs are uploaded to one of the 3 tiers:
 
 Note that tier is set a account level, but can be modified per blob. Moving between tiers can be automated by lifecycle rules. 
 
+Blob storage pricing (based on redundancy option, access tier, and capacity).  
 
+### Creating and using Storage Account
+Search for storage account in the portal, Create -> put it into a new resource group named storage-rg, Storage account name: storagecourselisa, Location, WE, Performance: Standard, Account kind: Storage V2, Replication: RA-GRS. In the networking pane, can set who can access it. -> Review + create. 
+
+Go to resource, and in the Overview page, we can see Location field has two locations, because we choose RA-GRS during creation. Next create a container for blobs. Click the Containers box in the page, + Container -> Name: storeimages, Public access level: Container (note there are 3 levels, default is private; then there is Blob, means anyone can read specific blobs in this container but cannot see the list of blobs in this container; then there is Container, means anyone have full read access to container) -> Create. Click on it to go inside this container, Upload -> select a file from local machine, under Advanced tab, note that you can choose the access tier (hod, cold, etc) -> Upload. 
+
+To view this picture in the browser, go to `https://[storage-account-name].blob.core.windows.net/[container-name]/[file/blob-name]`. Note that if you change the container access level to Private, you can no longer access it this way. 
+
+### Accessing Private Blobs with Keys and SAS Token
 
 
 
