@@ -215,6 +215,27 @@ Go to resource, and in the Overview page, we can see Location field has two loca
 To view this picture in the browser, go to `https://[storage-account-name].blob.core.windows.net/[container-name]/[file/blob-name]`. Note that if you change the container access level to Private, you can no longer access it this way. 
 
 ### Accessing Private Blobs with Keys and SAS Token
+When the access level for a container is private, there are 3 ways to access blobs inside it (active directory, access keys and shared access signature). 
+
+In the containers list in the portal, go to Access keys under the Settings pane. Access keys are used as a strong identifier for a client who wants to access the storage account. Click the Show keys button, can see two keys an two connection strings. You can use connection string with one of the client libraries to work with the storage account, it gives you the full permission to do anything in the storage account. There are two keys in case you want to regenerate one of the keys when a malicious third party has it. 
+
+Since Access Keys grants full permissions to the storage account, it may not be what we want. If we need to grant more limited access to the account, we should use SAS (Shared access signature, under the Settings pane) to create a unique connection string to the storage account with a very limited access which can expire in a specific time. You will also get a SAS token which you can use to have read access to the blob in the browser like a url. When giving access to your storage account to third parties, always prefer to use SAS token, and never distribute the key itself. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
