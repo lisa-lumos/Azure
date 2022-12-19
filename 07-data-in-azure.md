@@ -221,21 +221,30 @@ In the containers list in the portal, go to Access keys under the Settings pane.
 
 Since Access Keys grants full permissions to the storage account, it may not be what we want. If we need to grant more limited access to the account, we should use SAS (Shared access signature, under the Settings pane) to create a unique connection string to the storage account with a very limited access which can expire in a specific time. You will also get a SAS token which you can use to have read access to the blob in the browser like a url. When giving access to your storage account to third parties, always prefer to use SAS token, and never distribute the key itself. 
 
+### Networking and Failover of Storage Account
+We can check how much capacity we are using in the storage account: Under the Monitoring pane, go to Insights page. Click on Capacity (this display has a delay). 
+
+To see networking aspects of the storage account, go to Networking page under Setting pane. Under the Firewalls and virtual networks pane, you can decide to can access this storage account. Default is allowing all networks. Under the Private endpoint connections pane, you can define private link between this account and other resources. 
+
+Failover can be set up under the Geo-replication page in the Settings pane. Prepare for failover -> confirm. But since this storage account has read access with the redundancy, we can directly use it to access the image we previously stored in it, by adding `-secondary` before the `.blob` in the original url. 
+
+### CDN and Automation
 
 
 
+### Creating Storage Account for the ReadIt App
 
+### Azure Storage Explorer
 
+## Azure Redis
 
+### Azure Redis Pricing
 
+### Creating Redis and Connecting the Catalog
 
+### Connecting the Shopping Cart to Redis
 
-
-
-
-
-
-
+### Current Architecture
 
 
 
