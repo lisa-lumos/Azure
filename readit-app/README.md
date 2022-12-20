@@ -246,8 +246,10 @@ We will use Cosmos DB as the orders database. The component that is responsible 
 Now go to the readitfunctionapp in the portal, go to the function ProcessOrderCosmos, and click Get Function Url. Use postman to do the same (add an item). To see function logs in real time, click on the Code + Test in the Developer pane in the function, and click Logs. 
 
 
+## Creating Storage Account for the ReadIt App
+In the Portal search bar, search for storage account, Create -> Resource group: readit-app-rg, Storage account name: orders, Location: WE, Performance: Standard, Account kind: general perpose V2, Replication: RA-GRS -> Review+create. 
 
-
+Go to resource -> Containers -> + Container -> Name: neworders, Public access level: Private -> Create 
 
 
 

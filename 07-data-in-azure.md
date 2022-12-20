@@ -229,10 +229,13 @@ To see networking aspects of the storage account, go to Networking page under Se
 Failover can be set up under the Geo-replication page in the Settings pane. Prepare for failover -> confirm. But since this storage account has read access with the redundancy, we can directly use it to access the image we previously stored in it, by adding `-secondary` before the `.blob` in the original url. 
 
 ### CDN and Automation
+Change the access level of the container to Container. Go to Azure CDN page under the Blob service pane. Content Delivery Network is a network of small data centers spread across the world, and its target it to bring static content geographically closer to the user. CDN can be configured to use Azure Storage so the blobs in it will be automatically distributed to CDN networks. 
 
+To use CDN here, need to create a new CDN profile, which is a configuration of CDN for synchronization. CDN profile: Create new, Name: imagesearch, Pricing tier: Standard Microsoft, CDN endpoint name: XXX.azureedge.net, Origin hostname: (storage account url) -> Create (This can take a lot of time). To test it, copy the url of the CDN Hostname, and access the image using `https://[CDN-host-name]/[container-name]/[file/blob-name]`. 
 
+To configure automation, go to Lifecycle Management page under the Blob service pane, and configure rule based policy for moving blobs between tiers. Add a rule -> Rule name: move-to-archive, Rule scope: Apply rule to all blobs in your storage account -> Next, note that currently the management is only based on the Last modified day, More than(days ago): 60, Then: Move to archive storage. -> Add. 
 
-### Creating Storage Account for the ReadIt App
+Note that we can also define lifecycle management rules using the Code View (instead of the List View), with a JSON document. 
 
 ### Azure Storage Explorer
 
