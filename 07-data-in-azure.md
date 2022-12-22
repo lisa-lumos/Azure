@@ -237,9 +237,19 @@ To configure automation, go to Lifecycle Management page under the Blob service 
 
 Note that we can also define lifecycle management rules using the Code View (instead of the List View), with a JSON document. 
 
-### Azure Storage Explorer
+### Azure Storage Browser
+Desktop tool (need to install the app and login) that allows for access to storage accounts, upload, delete files etc. Similar functionalities can also be accessed via Storage Browser page in the storage account, which is a web UI. 
 
 ## Azure Redis
+
+
+
+
+
+
+
+
+
 
 ### Azure Redis Pricing
 
