@@ -241,28 +241,20 @@ Note that we can also define lifecycle management rules using the Code View (ins
 Desktop tool (need to install the app and login) that allows for access to storage accounts, upload, delete files etc. Similar functionalities can also be accessed via Storage Browser page in the storage account, which is a web UI. 
 
 ## Azure Redis
+Managed Redis on Azure, provides fast in-memory, distributed cache. Great for short-lived, frequently accessed data, such as shopping cart, stock quotes, etc. Fully compatible with OSS Redis (community edition) and Enterprise Redis - depends on service tiers. 
 
+Security: IP firewall rules, Service endpoints, Private endpoints, Secure communication (TLS). 
 
+Azure Redis Service Tiers:
+- Basic. Based on a single VM, no SLA, no distribution. Good for dev/test. 
+- Standard. Based on 2 VMs, replicated. SLA: up to 99.9%
+- Premium. High-performance, better throughput, lower latency. SLA: up to 99.95%
+- Enterprise. Based on Redis Enterprise, offers additional features (RediSearch, RedisBloom and more). SLA: up to 99.99%
+- Enterprise Flash. Uses non-volatile memory. Reduces storage cost. SLA: up to 99.99%. 
 
-
-
-
-
-
-
-
-### Azure Redis Pricing
-
-### Creating Redis and Connecting the Catalog
-
-### Connecting the Shopping Cart to Redis
-
-### Current Architecture
-
-
-
-## Redis Cache
-Redis is used to store the Shopping Cart data for our ReadIt App.
+Most clients will go for either standard or premium, depending on their needs. 
+ 
+The pricing is based on both the tier and the memory you consume. 
 
 ## How to select data store solution
 | Data Type | Used for | Examples | Options in Azure |

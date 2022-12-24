@@ -247,9 +247,20 @@ Now go to the readitfunctionapp in the portal, go to the function ProcessOrderCo
 
 
 ## Creating Storage Account for the ReadIt App
-In the Portal search bar, search for storage account, Create -> Resource group: readit-app-rg, Storage account name: orders, Location: WE, Performance: Standard, Account kind: general perpose V2, Replication: RA-GRS -> Review+create. 
+In the Portal search bar, search for storage account, Create -> Resource group: readit-app-rg, Storage account name: orders, Location: WE, Performance: Standard, Account kind: general purpose V2, Replication: RA-GRS -> Review+create. 
 
-Go to resource -> Containers -> + Container -> Name: neworders, Public access level: Private -> Create 
+Go to resource -> Containers -> + Container -> Name: neworders, Public access level: Private -> Create
+
+### Creating Redis and Connecting the Catalog
+
+
+
+### Connecting the Shopping Cart to Redis
+
+
+
+### Current Architecture
+
 
 
 
