@@ -252,8 +252,11 @@ In the Portal search bar, search for storage account, Create -> Resource group: 
 Go to resource -> Containers -> + Container -> Name: neworders, Public access level: Private -> Create
 
 ### Creating Redis and Connecting the Catalog
+Turn on the catalog-vm, in the search bar, search for Redis, Create -> In the Basics pane, Resource group: readit-app-rg, DNS name: readitredis, Location: WE, Cache type: Basic C0 -> In the networking pane, Connectivity method: Public Endpoint (default) -> Review + create. 
 
+Go to resource, note Host name is readitredit.redis.cache.windows.net. To scale the instance, go to the Scale page under Settings pane. In the Advanced settings page, change the Minimum TLS version from Default to 1.2, and click Save. 
 
+Open the catalog app in VS code, in appsettings.json file, place the Redis connection string. The first part (key) can be obtained in the Access keys page under Settings pane, and the first part of the Primary connectoin string before the password, connected by @. In the index.cshtml.cs file, uncomment the redis part of the code. Publish the code to the cloud. 
 
 ### Connecting the Shopping Cart to Redis
 
