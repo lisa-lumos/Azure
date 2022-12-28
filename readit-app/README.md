@@ -259,13 +259,17 @@ Go to resource, note Host name is readitredit.redis.cache.windows.net. To scale 
 Open the catalog app in VS code, in appsettings.json file, place the Redis connection string. The first part (key) can be obtained in the Access keys page under Settings pane, and the first part of the Primary connectoin string before the password, connected by @. In the index.cshtml.cs file, uncomment the redis part of the code. Publish the code to the cloud. 
 
 ### Connecting the Shopping Cart to Redis
-
+Open the cart project in vs code, put Redis connection string, the DB connection string, and the OrderFunctionUrl in the appseetings.json file. Uncomment row 37 in index.cshtml.cs file. Test it locally, the publish to Azure AKS. 
 
 
 ### Current Architecture
+<img src="images/architecture7.png" style="width: 90%;">
 
-
-
+Existing problems:
+- The Orders Function is publicly available and synchronous
+- The inventory page is open for everyone
+- We don’t really know how the app is functioning
+- The website is not redundant – what happens if the whole region goes down?
 
 
 
