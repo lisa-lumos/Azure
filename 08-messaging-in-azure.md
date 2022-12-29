@@ -10,6 +10,11 @@ Part of the `Azure Storage Account`, pricing included in Storage Account, and sa
 
 Performance: for requests of 1kb msg - 20k msgs/sec/account or 2k msgs/sec/queue. Max msg size: 64kb. Has client libraries for many dev languages. Easy to learn.
 
+### Using Storage Queue
+Search storage accounts in the portal. Create -> Create a new rg, named queue-rg, Storage account name: storagequeue, Location: WE, Performance: Standard, Account kind: StorageV2, Replication: LRS -> Review + create. 
+
+Go to resource, click the Queues rectangle, + Queue -> Queue name: store-messages -> OK. Click on this queue, + Add message -> Message text: ("id":4, "status":"success"), Expires in: 7 days, uncheck the Encode the message body in Base64, so we could see the content -> OK. To retrieve the message, in the c# code, put storage account connection string and queueName into the variables, and run the code. 
+
 ## Service Bus
 Fully managed, full blown message queueing service. It is durable, which means that your chances of losing messages are extremely low. It supports point-to-point (Queue) and pub/sub (Topic) scenarios. It is compatible with AMQP protocol and JMS 2.0 API (Premium tier only).
 
