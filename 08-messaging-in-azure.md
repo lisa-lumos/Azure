@@ -1,6 +1,4 @@
 # 8. Messaging in Azure
-
-## Messaging Services in Azure
 Messaging is a core part of every Microservices architecture.
 
 Four fully managed messaging services in Azure: `Storage Queue, Service Bus, Event Grid, Event Hubs`. 
@@ -45,9 +43,12 @@ Allows building event-based architectures, publishes events to interested partie
 Terminology: 
 - `Event` (What happened, e.g.: storage blob added), 
 - `Publisher` (Who created the event, e.g.: Microsoft), 
-- `Event Source` (Where the event happened, e.g.: Storage account), - `Topic` (a logical group of related events, this is what subscribers listen to), 
+- `Event Source` (Where the event happened, e.g.: Storage account), 
+- `Topic` (a logical group of related events, this is what subscribers listen to), 
 - `Subscription` (Which events interest me, e.g.: Storage blob added),
-- `Event handler` (Where the event is sent, e.g.: Azure function, event hubs). SLA: 99.99%. Max event size: 1mb. 
+- `Event handler` (Where the event is sent, e.g.: Azure function, event hubs). 
+
+SLA: 99.99%. Max event size: 1mb. 
 
 Performance: 10m events/sec, or 5k events/sec/topic. 
 

@@ -251,18 +251,18 @@ In the Portal search bar, search for storage account, Create -> Resource group: 
 
 Go to resource -> Containers -> + Container -> Name: neworders, Public access level: Private -> Create
 
-### Creating Redis and Connecting the Catalog
+## Creating Redis and Connecting the Catalog
 Turn on the catalog-vm, in the search bar, search for Redis, Create -> In the Basics pane, Resource group: readit-app-rg, DNS name: readitredis, Location: WE, Cache type: Basic C0 -> In the networking pane, Connectivity method: Public Endpoint (default) -> Review + create. 
 
 Go to resource, note Host name is readitredit.redis.cache.windows.net. To scale the instance, go to the Scale page under Settings pane. In the Advanced settings page, change the Minimum TLS version from Default to 1.2, and click Save. 
 
-Open the catalog app in VS code, in appsettings.json file, place the Redis connection string. The first part (key) can be obtained in the Access keys page under Settings pane, and the first part of the Primary connectoin string before the password, connected by @. In the index.cshtml.cs file, uncomment the redis part of the code. Publish the code to the cloud. 
+Open the catalog app in VS code, in appsettings.json file, place the Redis connection string. The first part (key) can be obtained in the Access keys page under Settings pane, and the first part of the Primary connection string before the password, connected by @. In the index.cshtml.cs file, uncomment the redis part of the code. Publish the code to the cloud. 
 
-### Connecting the Shopping Cart to Redis
+## Connecting the Shopping Cart to Redis
 Open the cart project in vs code, put Redis connection string, the DB connection string, and the OrderFunctionUrl in the appseetings.json file. Uncomment row 37 in index.cshtml.cs file. Test it locally, the publish to Azure AKS. 
 
 
-### Current Architecture
+## Current Architecture
 <img src="images/architecture7.png" style="width: 90%;">
 
 Existing problems:
@@ -271,11 +271,16 @@ Existing problems:
 - We don’t really know how the app is functioning
 - The website is not redundant – what happens if the whole region goes down?
 
+## Connecting Event Grid to the Orders Function
+Turn on catalog-vm. In the portal, search for Even Grid System Topics. Note there is no "event grid service" in Azure, and when you want to use it, you simply create a topic, whether it is a system topic or a custom topic. + Create -> Topic Type: Storage Accounts, Subscription: default, Resource group: readit-app-rg, Resource: ordersreadit (storage account). Name: orders-topic -> Review + Create.
 
+So that when a new order is placed in the storage account, an event will be published, and the function will listen to this event and handle the order. So instead of activating the function through the HTTP trigger and thus making it public and synchronous, it will be activated by the event grid, which will be much safer and async.
 
+Go to resource, to select the function as the subscriber of the topic: + Event Subscription -> Event Subscription Details: Name: order-subscription; Event types: Blob Created, Endpoint Type: Azure Function. Select an end point -> Note that Azure automatically chooses the function that has an event grid trigger -> Confirm selection -> Create. 
 
+To test it, upload a blob file to the neworders container in the storage account, check the file in the Code + Test part in the function app, then see the same stored in cosmos db. 
 
-
+## Connecting the Shopping Cart to the Storage Account
 
 
 
