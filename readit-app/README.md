@@ -281,10 +281,10 @@ Go to resource, to select the function as the subscriber of the topic: + Event S
 To test it, upload a blob file to the neworders container in the storage account, check the file in the Code + Test part in the function app, then see the same stored in cosmos db. 
 
 ## Connecting the Shopping Cart to the Storage Account
+Will need the connection string of storage account from the Access keys page under the Settings pane. 
 
-
-
-
+## Protecting the Orders Function
+The endpoint of the orders function is currently public. Go to the Networking page under Settings pane, Configure Access Restrictions -> + Add rule -> Name: event-grid-traffic, Action: Allow, Priority: 100, Type: Service Tag, Service Tag: AzureEventGrid -> Add rule. 
 
 
 
