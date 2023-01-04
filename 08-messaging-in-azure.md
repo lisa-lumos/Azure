@@ -14,9 +14,9 @@ Search storage accounts in the portal. Create -> Create a new rg, named queue-rg
 Go to resource, click the Queues rectangle, + Queue -> Queue name: store-messages -> OK. Click on this queue, + Add message -> Message text: ("id":4, "status":"success"), Expires in: 7 days, uncheck the Encode the message body in Base64, so we could see the content -> OK. To retrieve the message, in the c# code, put storage account connection string and queueName into the variables, and run the code. 
 
 ## Service Bus
-Fully managed, full blown message queueing service. It is durable, which means that your chances of losing messages are extremely low. It supports point-to-point (Queue) and pub/sub (Topic) scenarios. It is compatible with AMQP protocol and JMS 2.0 API (Premium tier only).
+Fully managed message queueing service. Durable - your chances of losing messages are extremely low. Supports point-to-point (Queue) and pub/sub (Topic) scenarios. Compatible with AMQP protocol (for IoT devices) and JMS 2.0 API (Java message services, Premium tier only).
 
-Service bus queues: `Message sender` (web app, mobile app, service) -> `Service bus namespace` (contains a queue) -> `Message receiver` (Service or Application). Available in Basic Tier and above. 
+Service bus queues: `Message sender` (web app, mobile app, service) -> `Service bus namespace` (contains a queue) -> `Message receiver` (Service / Application). Available in Basic Tier and above. 
 
 Service bus topics: `Message sender` (web app, mobile app, service) -> `Service bus namespace` (contains a topic, which then goes into multiple subscriptions) -> `Message receiver` (business logic or audit , etc.).  Available in Standard Tier and above. 
 
@@ -28,13 +28,15 @@ Service Bus advanced features:
 - Duplicate detection
 - ...
 
-Availability: SLA: 99.9%; Can be configured for geo-disaster recovery. 
+Availability: SLA: 99.9%; Can be configured for automatic geo-disaster recovery. 
 
 Security: IP Firewall rules, Service endpoints, Private endpoints. 
 
 Tiers: Basic, Standard, Premium. 
 
 Pricing: based on the tier and num of operations. 
+
+### Using Service Bus
 
 
 ## Event Grid
