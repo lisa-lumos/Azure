@@ -37,7 +37,11 @@ Tiers: Basic, Standard, Premium.
 Pricing: based on the tier and num of operations. 
 
 ### Using Service Bus
+Search Service bus in the portal, + Create -> Resource group: (create a new rg sb-rg), Namespace name: sbdemo, Location: WE, Pricing tier: Basic -> Create. 
 
+Go to resource, +Queue -> Name: my-items -> Create. Under Entities pane, click Queues, and see this newly created queue. To get the connection string, go to Shared access policies under Settings pane, click RootManageSharedAccessKey, and see the field Primary Connection String. A short code can be used to send a test message. 
+
+To check messages in this queue, go to this queue, and see that there is an active message in the queue. To see the content of this message, go to Service Bus Explorer under the Settings pane, go to the Receive tab, click Receive button, double click the returned metadata line, then we can see the actual content of the message. 
 
 ## Event Grid
 Allows building event-based architectures, publishes events to interested parties, and has `no queue nor order`; has `strong integration with many Azure services`, and is cost effective, simple pricing with no tiers. High availability is built in. `Event sources -> Event grid -> Event handlers`. 
