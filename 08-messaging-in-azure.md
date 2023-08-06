@@ -87,6 +87,19 @@ These TUs are prepurchased, and billed by the hour.
 
 Pricing: based on tier, ingress and TU. 
 
+### Using Event Hubs
+
+
+
+
+
+
+
+
+
+
+
+
 ## Selecting messaging solution
 
 | Service | Used for | Guarantees order | Max msg size | And also...

@@ -26,12 +26,12 @@ Click "Go to resource", read through the Essentials section, and note that "Virt
 - `Auto Shutdown` - Automatically shuts down the machine daily at the time you choose, mainly for test / dev machines. Note that storage and IP (if static) costs still incurred. Usually can save >50% of VM cost
 - `Reserved Instances` - Allow upfront payment with substantial discount. It is usually offered for 1 or 3 years, and is great for production machine which run continuously. Offers great discounts (up to 62%), and can be divided to monthly payments. Cannot be stopped / refunded
 - `Spot Instances` - Machines that run on unused capacity in Azure. Can be evicted any moment when needed by Azure. Offers up to 90% discount, price fluctuates according to demand. Great for non-critical, non-continuous tasks. ie. Batch processes, long running calculations
-- `Disk Optimization` - Make sure to select the right disk for the machine. Default is `Premium SSD` – the most expensive option. Non IO-intensive machines can do with `Standard SSD`. ie. App servers, in-memory cache. Note: Disk type affects the `SLA`
+- `Disk Optimization` - Make sure to select the right disk for the machine. Default is `Premium SSD` - the most expensive option. Non IO-intensive machines can do with `Standard SSD`. ie. App servers, in-memory cache. Note: Disk type affects the `SLA`
 
 More Cost Saving Techniques:
 
 - Select the right size for your machine
-- CPU shouldn’t rest, you pay for it...
+- CPU shouldn't rest, you pay for it...
 - Select Linux over Windows when possible to avoid license fee
 - Check price in nearby regions
 
@@ -41,10 +41,10 @@ More Cost Saving Techniques:
 Availability Concepts in Azure: Fault Domain, Update Domain, Availability Set, Availability Zone. 
 
 `Fault Domain`: `Logical group of physical hardware` that share a `common power
-source and network switch`. Similar to rack in a traditional data center. If there’s a problem with the power or networking in the domain (=rack) – all servers in it shut down. So you want to make sure your servers are spread
+source and network switch`. Similar to rack in a traditional data center. If there's a problem with the power or networking in the domain (=rack) - all servers in it shut down. So you want to make sure your servers are spread
 across more than one fault domain (=rack). 
 
-`Update Domain`: `Logical group of physical hardware` that can `undergo maintenance and be rebooted at the same time`. Maintenance is done by Azure at its own discretion. If all your servers are in the same update domain, they’ll reboot at the same time during maintenance. You want to make sure your servers are spread across more than one update domain. 
+`Update Domain`: `Logical group of physical hardware` that can `undergo maintenance and be rebooted at the same time`. Maintenance is done by Azure at its own discretion. If all your servers are in the same update domain, they'll reboot at the same time during maintenance. You want to make sure your servers are spread across more than one update domain. 
 
 `Availability Set`: `A collection of Fault Domains and Update Domains` your VMs will be spread across. It is always `in a same zone`. Can contain up to `3 Fault Domains` and up to `20 Update Domains`. `All domains (Fault & Update) are in the same Zone (=datacenter)`.
 
@@ -52,17 +52,17 @@ For example, if an availability set has 2 fault domains and 3 update domains, Az
 
 Taking Advantage of Availability Set:
 
-- Deploy identical VMs into t`he same Availability Set`, which ensures they won’t be shut down simultaneously when a single fault domain shuts down or an update domain reboots
-- If needed – deploy `load balancer` to route between the VMs
+- Deploy identical VMs into t`he same Availability Set`, which ensures they won't be shut down simultaneously when a single fault domain shuts down or an update domain reboots
+- If needed - deploy `load balancer` to route between the VMs
 - Availability Set is `free`, you pay only for the additional VMs
 
 ### Availability Zone
-A `physically separate zone` within an `Azure region`. Technically – a building containing an autonomous data center. Provides protection against a `complete zone shutdown`. Hence the `better SLA`.
+A `physically separate zone` within an `Azure region`. Technically - a building containing an autonomous data center. Provides protection against a `complete zone shutdown`. Hence the `better SLA`.
 
 Taking Advantage of Availability Zone:
 
-- Deploy identical VMs into `separate Availability Zones` in the same Region, which ensures they won’t be shut down simultaneously when the zone shuts down
-- If needed – deploy `load balancer` to route between the VMs
+- Deploy identical VMs into `separate Availability Zones` in the same Region, which ensures they won't be shut down simultaneously when the zone shuts down
+- If needed - deploy `load balancer` to route between the VMs
 - Availability Zone is `free`, you pay only for the additional VMs
 
 Note that not all regions have availability zones. 
@@ -72,9 +72,9 @@ At the last stage of creating a VM in the portal, before clicking the "Create" b
 
 ARM Template is a `declarative` way of `deploying resources`. 
 
-`Declarative` way describes the end result and allows “What-If” operation. It can deploy multiple resources at once. It can be integrated in CI/CD processes, and be source controlled. It is used ARM Template. 
+`Declarative` way describes the end result and allows "What-If" operation. It can deploy multiple resources at once. It can be integrated in CI/CD processes, and be source controlled. It is used ARM Template. 
 
-`Imperative` way sends instructions to run. It is error prone, can’t be verified, and can’t be source controlled. It is suited for quick and dirty operations. It is used by Azure CLI, PowerShell (Although they can run ARM Template too). 
+`Imperative` way sends instructions to run. It is error prone, can't be verified, and can't be source controlled. It is suited for quick and dirty operations. It is used by Azure CLI, PowerShell (Although they can run ARM Template too). 
 
 In the previous step, in the template page, it has a few tabs, including Template tab and the Parameters tab. If we click the Download button at the upper left, we will get the template as a zip file. Inside, there are two files: template.json and parameters.json. Now create a folder and copy these two files in. For the parameters.json file, you can change parameters such as osDiskType, and need to modify the value of the adminPassword field. Currently when deploy the template using the Portal, we cannot use the parameters file, it may change in the future. If we go to the Portal, and go to a list of resource groups, we can see "cloud-shell-storage-westus" rg which was automatically created when we use the cloud shell, and contains the storage account. Click on the only storage account inside this rg. In the overview page, click "File shares", and click on the single file share in the new page. Click "Add Directory", and name it "templates". Go into this dir so we can upload our templates file. Click "Upload", and select the template file and parameter file from local disk. Next, click the "Cloud Shell" button in the Portal, and use Bash. 
 ```
@@ -108,7 +108,7 @@ This is a not commonly known feature. It is a `Rest API` that is accessible from
 To use this API, create a new VM with WS data center, connect to it using rdp, and wait for the Server Manager to load up, so we can configure the machine for easy web browsing. Go to Local Sever on the left pane, on the right, near "IE Enhanced Security Configuration", click the "On" hyperlink, in the pop up window, select "Off" for both Admins and Users, and save. Next open IE, and download and install Postman app. In Postman, create a new tab, use the "GET" request type, and go to Headers, set the value of "KEY" as "Metadata", and "VALUE" as "true", and the link as `http://169.254.169.254/metadata/instance?api-version=2020-06-01`. Next, click "Send" and receive various info about this VM. If we replace the url with `http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01`, we can get a list of scheduled events. 
 
 ## 🏷 App Services
-`App Services` is a `fully managed web hosting for websites`, you just need to publish your code – and it just runs. You have no access to the underlying servers, it is secured and compliant by Azure. It integrates with many source controls and DevOps engines such as GitHub, BitBucket, Azure DevOps, DockerHub and more - the app is updated automatically when you upload a new version of code on Github. 
+`App Services` is a `fully managed web hosting for websites`, you just need to publish your code - and it just runs. You have no access to the underlying servers, it is secured and compliant by Azure. It integrates with many source controls and DevOps engines such as GitHub, BitBucket, Azure DevOps, DockerHub and more - the app is updated automatically when you upload a new version of code on Github. 
 
 App Services support these `platforms`: `.NET`, `.NET Core`, `Node.JS`, `Java`, `Python`, `PHP`. It also supports `containers` - if you package your app in Docker then upload it to the service, it will just run, you don't need any configurations. The app types supported are: `Web Apps`, `Web API`, `Web Jobs (batch processes)`.  
 
@@ -134,7 +134,7 @@ With VMs, I recommended you to shut down the VM when not in use. With App Servic
 Managed Kubernetes on Azure, which allows `deploying containers and managing them using Kubernetes`. You pay only for the instances (=`VMs`) used to run Kubernetes. 
 
 ## Containers
-In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren’t found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be executed using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
+In traditional deployment, code was copied to and built on the production server, problems were found on the servers that weren't found in the dev machines, and took a lot of time and resources to find out their differences. Container is a thin packaging model that packages software, its dependencies, and configuration files together, which can then be copied between machines. This package creates an atomic unit that can be executed using only the files inside the package, completely independent from the rest of the machine, except it uses the underlying operating system.
 
 Diff between containers and VMs: One host/hypervisor can run VMs of different OS, and for containers, the host (container runtime) runs multiple containers. The containers are extremely lightweight compared with the VMs, this is because the containers have the same OS with their host, while it is not the case with VMs.
 
@@ -165,38 +165,21 @@ Trigger is the event that makes the function run. There are quite a few types of
 Bindings are declarative connection to other resource(s). With binding, you can set up a connection between the function and another resource in the cloud, so that you can read/write to value to these resources. These bindings are provided as parameter to the function and makes connecting to other resources extremely easy. Bindings are not mandatory. 
 
 Examples:
-- Run every 5 minutes (Timer Trigger) and calculate the sum of a column in a DB. If it’s above 115, send an event in EventGrid (Binding).
+- Run every 5 minutes (Timer Trigger) and calculate the sum of a column in a DB. If it's above 115, send an event in EventGrid (Binding).
 - When a message arrives in the Orders Queue (Queue Trigger), save it in Cosmos DB (Binding) for future handling
 -  Receive HTTP Request (HTTP Trigger) with 4 numbers, and return the smallest one of them (no binding)
 
 Supported languages for Azure functions: C#, JavaScript (nodeJS), Java, Python, PowerShell, F#. 
 
-Cold start: Because Azure Functions are completely managed by Azure, so after some time of inactivity Azure might take down the Function’s host, therefore the next activation of the Function will take 2-3 seconds before the code runs. This delay is not a issue for async triggers such as Queues, timers etc, but it is a problem for HTTP-Triggered functions, because http calls are synchronous, and the calling party expects a quick response. 
+Cold start: Because Azure Functions are completely managed by Azure, so after some time of inactivity Azure might take down the Function's host, therefore the next activation of the Function will take 2-3 seconds before the code runs. This delay is not a issue for async triggers such as Queues, timers etc, but it is a problem for HTTP-Triggered functions, because http calls are synchronous, and the calling party expects a quick response. 
 
 To avoid cold start, need to select the right hosting plan. 
 
 ### Azure Functions Hosting Plans
-- Consumption: most popular, pay as you go, 1.5GB ram limit, has code start problem. Has free grants per month. Charged by per GB*s of memory and execution time, and num of total executions. 
-- Premium: pay for pre-warmed instances (hosts), so has no code starts, and predictable price. Charged by vCPU counts, and num of gb of memory reservation (so has no memory limit, up to host RAM). Can pay for scale out instances. Can have better performance. Get a security feature: VNet integration. It is more expensive than the consumption plan. 
-- Dedicated: The functions run on an existing App Service. It is great if the server is under-utilized; and there are not additional costs for this plan. For this plan, make sure that the "Always On" is clicked in the app service configuration to avoid disabling functions. There's no auto-scale for the dedicated plan. 
+- Consumption: most popular, pay as you go, 1.5GB ram limit, has cold start problem. Has free grants per month. Charged by per GB*s of memory and execution time, and num of total executions. 
+- Premium: pay for pre-warmed instances (hosts), so has no cold starts, and predictable price. Charged by vCPU counts, and num of gb of memory reservation (so has no memory limit, up to host RAM). Can pay for scale out instances. Can have better performance. Get a security feature: VNet integration. It is more expensive than the consumption plan. 
+- Dedicated: The functions run on an existing App Service. It is great if the server is under-utilized; and there are no additional costs for this plan. For this plan, make sure that the "Always On" is clicked in the app service configuration to avoid disabling functions. There's no auto-scale for the dedicated plan. 
 
 ### Durable Functions
 They are Stateful Functions that interact with external resources and keep
-track of flow. They offer very simple syntax, hide complexities of managing state, retries, etc. For example, you can chain them - Function Chaining – call various Functions sequentially, and apply the output of each function to the next one. Each of these functions has its own state, its own process, and runs in its own time. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+track of flow. They offer very simple syntax, hide complexities of managing state, retries, etc. For example, you can chain them - Function Chaining - call various Functions sequentially, and apply the output of each function to the next one. Each of these functions has its own state, its own process, and runs in its own time. 
